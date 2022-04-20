@@ -13,6 +13,7 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "strictPropertyInitialization": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
@@ -24,8 +25,10 @@
     ]
   },
   "angularCompilerOptions": {
+    "strict": true,
     "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
+    "strictInjectionParameters": false,
+    "strictPropertyInitialization": false,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   }
