@@ -7,44 +7,15 @@
             <div class="col-sm-5">
               <h2>document <b>Management</b></h2>
             </div>
-            <div class="col-sm-7">
-              <a href="#" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New
+            <div *ngIf="show" class="col-sm-7">
+              <a href="#" (click)="toggleButtons()" routerLinkActive="list-item-active" routerLink="/documents/add" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New
                   document</span></a>
+            </div>
+            <div *ngIf="!show" class="col-sm-7">
+              <a href="#" (click)="toggleButtons()" routerLinkActive="list-item-active" routerLink="/documents/show" class="btn btn-secondary"><i class="material-icons">&#xE417;</i> <span>Show All document</span></a>
             </div>
           </div>
         </div>
-        <h3 class="notfound" *ngIf="documents.length == 0">no documents found</h3>
-        <table *ngIf="documents.length > 0" class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>title</th>
-              <th>module</th>
-              <th>category</th>
-              <th>Date added</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- <a *ngFor="let document of documents" [routerLink]="['/documents', document._id]" routerLinkActive="is-active"> -->
-            <tr *ngFor="let document of documents">
-              <td> {{document.titleFr}}</td>
-              <td> {{ document.module }} </td>
-              <td> {{ document.category }} </td>
-              <td> {{ document.dateAdded }} </td>
-              <td>
-                <!-- <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i -->
-                <!--     class="material-icons">&#xE8B8;</i></a> -->
-                <!-- <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i -->
-                <!--     class="material-icons">&#xE5C9;</i></a> -->
-                <a mat-list-item>
-                  <mat-icon>person</mat-icon>
-                </a>
-                <a mat-list-item (click)="printdocument(document._id)">
-                  <mat-icon style="color: red">delete</mat-icon>
-                </a>
-              </td>
-            </tr>
-            <!-- </a> -->
-          </tbody>
-        </table>
+        <router-outlet></router-outlet>
       </div>
     </div>

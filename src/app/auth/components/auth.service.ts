@@ -23,7 +23,6 @@ export class AuthService {
         }
       }).pipe(
         map((res: any) => {
-          console.log(res)
         })
       );
 

@@ -14,9 +14,6 @@ export class UsersService {
   getUser(userId: string, token: string) {
     return this.webService.get(`users/${userId}`, token);
   }
-  createUser(payload: any) {
-    return this.webService.post('users/create', payload);
-  }
   deleteUser(payload: any) {
     return this.webService.delete('users/delete/' + payload);
   }

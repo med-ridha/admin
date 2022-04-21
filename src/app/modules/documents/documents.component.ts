@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import DocumentJ from 'src/app/models/documentJ';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-documents',
@@ -7,14 +7,19 @@ import DocumentJ from 'src/app/models/documentJ';
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit {
-  documents: DocumentJ[] = []
-  constructor() { }
+  show: boolean = false;
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
+    if (this.route.url === "/documents/show") {
+      this.show = true;
+    } else {
+      this.show = false;
+    }
   }
 
-  printdocument(id: string) {
-    console.log(id);
+  toggleButtons() {
+    this.show = !this.show;
   }
 
 }

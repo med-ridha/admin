@@ -1,21 +1,15 @@
-body {
-  color: #566787;
-  background: #f5f5f5;
-  font-family: 'Varela Round', sans-serif;
-  font-size: 13px;
-}
-.container-xl{
-  max-width: 100%;
-}
 .table-responsive {
   margin: 30px 0;
 }
 
-.table-wrapper {
+.container-xl{
+  max-width:100%;
+}
   .notfound{
     text-align: center;
     margin-top: 30px;
   }
+.table-wrapper {
   background: #fff;
   padding: 20px 25px;
   border-radius: 3px;
@@ -199,6 +193,3 @@ table.table .avatar {
   margin-top: 10px;
   font-size: 13px;
 }
-
-
-

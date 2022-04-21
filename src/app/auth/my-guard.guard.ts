@@ -27,9 +27,6 @@ export class MyGuardGuard implements CanActivate, CanActivateChild {
         return true;
       },
       error: async (err: any) => {
-        console.log("i work here")
-        console.log('not?')
-        console.log(err)
         localStorage.clear();
         await this.route.navigate(['login']);
         return false

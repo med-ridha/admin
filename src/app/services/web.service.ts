@@ -20,8 +20,12 @@ export class WebService {
     });
   }
 
-  post(uri: string, payload: any) {
-    return this.http.post(`${this.ROOTURL}/${uri}`, payload);
+  post(uri: string, payload: any, token: string) {
+    return this.http.post(`${this.ROOTURL}/${uri}`, payload, {
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      }
+    });
   }
 
   put(uri: string, payload: any) {

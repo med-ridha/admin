@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { DefaultModule } from './layouts/default/default.module';
 import { AuthModule } from './auth/auth.module';
+import { DocumentsModule } from './modules/documents/documents.module';
+import { UsersModule } from './modules/users/users.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AuthModule } from './auth/auth.module';
     BrowserAnimationsModule,
     DefaultModule,
     HttpClientModule,
-    AuthModule
+    AuthModule,
+    DocumentsModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]

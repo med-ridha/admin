@@ -1,7 +1,7 @@
 export default class DocumentJ {
   constructor(
-    public module: string,
-    public category: string,
+    public moduleId: string,
+    public categoryId: string,
     public titleFr: string,
     public bodyFr: string,
     public titleAr: string,
