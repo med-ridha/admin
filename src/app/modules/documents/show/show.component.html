@@ -12,7 +12,8 @@
   <tbody>
     <!-- <a *ngFor="let document of documents" [routerLink]="['/documents', document._id]" routerLinkActive="is-active"> -->
     <tr *ngFor="let document of documents">
-      <td> {{document.titleFr}}</td>
+      <td *ngIf="document.titleFr !== 'not available'"> {{document.titleFr}}</td>
+      <td *ngIf="document.titleFr === 'not available'"> {{document.titleAr}}</td>
       <td> {{ getMod(document.moduleId) }} </td>
       <td> {{ getCat(document.categoryId) }} </td>
       <td> {{ document.dateAdded }} </td>

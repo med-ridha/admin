@@ -9,13 +9,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="form_titleFr">Title Fr</label>
-                  <input id="titleFr" ngModel #titleFr="ngModel" type="text" name="titleFr" class="form-control"
+                  <input id="titleFr" autocomplete='off' ngModel #titleFr="ngModel" type="text" name="titleFr" class="form-control"
                     placeholder="Enter title Fr">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group"> <label for="form_titleAr">Title Ar</label>
-                  <input id="titleAr" ngModel #titleAr="ngModel" type="text" name="titleAr" class="form-control"
+                  <input id="titleAr" autocomplete='off'ngModel #titleAr="ngModel" type="text" name="titleAr" class="form-control"
                     placeholder="Enter title Ar">
                 </div>
               </div>
@@ -57,7 +57,7 @@
                     <a (click)='switchCat()'>
                       <mat-icon>cancel</mat-icon>
                     </a>
-                  <input id="categoryName" ngModel #categoryName="ngModel" type="text" name="categoryName"
+                  <input id="categoryName" autocomplete='off' ngModel #categoryName="ngModel" type="text" name="categoryName"
                     class="form-control" placeholder="Enter categorie" [required]='isHidden'>
                 </div>
               </div>
@@ -72,7 +72,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="ref">Ref</label>
-                  <input id="ref" ngModel #ref="ngModel" type="text" name="ref" class="form-control"
+                  <input id="ref" ngModel #ref="ngModel" autocomplete='off' type="text" name="ref" class="form-control"
                     placeholder="Enter ref" required>
                 </div>
               </div>
