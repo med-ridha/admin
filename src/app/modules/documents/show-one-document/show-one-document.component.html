@@ -1,0 +1,56 @@
+<div id="top" class="">
+  <div class="">
+    <article>
+      <div class="">
+        <div class=""></div>
+        <div class="">
+          <section>
+            <div class="">
+              <div>
+                <div class="float-container">
+                  <h1 class="title float-child">{{doc.titleFr}}
+                  </h1>
+                  <div style="width: 15%">
+                    <div class="float-child modifyButton col-sm-7">
+                      <a href="#" routerLinkActive="Active" routerLink="/documents/add" class="btn btn-secondary"><i
+                          class="material-icons">&#xE3C9;</i> <span>Modify</span></a>
+                    </div>
+                    <div class="float-child modifyButton col-sm-7">
+                      <a href="#" (click)="deleteDocumentFromup(doc._id, doc.moduleId, doc.categoryId)"
+                        class="red btn btn-secondary"><i class="material-icons">&#xE872;</i> <span>Delete</span></a>
+                    </div>
+                  </div>
+
+                </div>
+                <hr>
+                <div class="float-container">
+                  <div class="float-child big">
+                    <p>{{doc.bodyFr}}
+                    </p>
+                  </div>
+                  <div class="float-child small">
+                    <h2>Details</h2>
+                    <label>Module</label>
+                    <p>{{getMod(doc.moduleId)}}</p>
+                    <br>
+                    <label>Categorie</label>
+                    <p>{{getCat(doc.categoryId)}}</p>
+                    <br>
+                    <label>Ref</label>
+                    <p>{{doc.ref}}</p>
+                    <br>
+                    <label>Date Added</label>
+                    <p>{{dateAdded}}</p>
+                    <br>
+                    <label>Date Published</label>
+                    <p>{{dateP}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>

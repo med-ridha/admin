@@ -3,16 +3,24 @@
     <div class="table-responsive">
       <div class="table-wrapper">
         <div class="table-title">
-          <div class="row">
-            <div class="col-sm-5">
+          <div class="row float-container">
+            <div class="col-sm-5 float-child">
               <h2>document <b>Management</b></h2>
             </div>
-            <div *ngIf="show" class="col-sm-7">
-              <a href="#" (click)="toggleButtons()" routerLinkActive="list-item-active" routerLink="/documents/add" class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New
-                  document</span></a>
-            </div>
-            <div *ngIf="!show" class="col-sm-7">
-              <a href="#" (click)="toggleButtons()" routerLinkActive="list-item-active" routerLink="/documents/show" class="btn btn-secondary"><i class="material-icons">&#xE417;</i> <span>Show All document</span></a>
+            <div class='float-child'>
+              <div class='float-container'>
+
+                <div *ngIf="show" class="buttonSize float-child col-sm-7">
+                  <a href="#" (click)="toggleButtons()" routerLinkActive="Active" routerLink="/documents/add"
+                    class="btn btn-secondary"><i class="material-icons">&#xE147;</i> <span>Add New
+                      document</span></a>
+                </div>
+                <div *ngIf="!show" class="buttonSize float-child col-sm-7">
+                  <a href="#" (click)="toggleButtons()" routerLinkActive="Active" routerLink="/documents/show"
+                    class="btn btn-secondary showButton"><i class="material-icons">&#xE417;</i> <span>Show All
+                      document</span></a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import DocumentJ from 'src/app/models/documentJ';
 import Modules from 'src/app/models/modules';
 import { DocumentsService } from 'src/app/services/documents.service';
@@ -11,7 +12,7 @@ import { DocumentsService } from 'src/app/services/documents.service';
 export class ShowComponent implements OnInit {
 
   documents: DocumentJ[] = []
-  constructor(private documentService: DocumentsService) { }
+  constructor(private documentService: DocumentsService, private router: Router) { }
 
   modules: Modules[];
 
@@ -33,9 +34,34 @@ export class ShowComponent implements OnInit {
       }
     })
   }
-
-  printdocument(id: string) {
-    console.log(id);
+  deleteDocument(docId: string, modId: string, catId: string) {
+    let answer = confirm('are you sure  you want to delete this document?')
+    let token = localStorage.getItem('token') ?? "";
+    if (answer) {
+      let payload = {
+        "documentId": docId,
+        "moduleId": modId,
+        "categoryId": catId
+      }
+      this.documentService.deleteDocument(payload, token).subscribe((result: any) => {
+        if (result.code == 0) {
+          this.documentService.getDocuments(token).subscribe((result: any) => {
+            if (result.code == 0) {
+              this.documents = result.message;
+            } else {
+              console.log(result.message);
+            }
+          })
+        } else {
+          alert('someting went wrong')
+        }
+      })
+    }
+  }
+  printdocument(docId: string, modId: string, catId: string) {
+    console.log("docId: " + docId);
+    console.log("modId: " + modId);
+    console.log("catId: " + catId);
   }
   getMod(id: string): string {
     for (let mod of this.modules) {

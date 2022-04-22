@@ -5,6 +5,7 @@ import { DefaultComponent } from './layouts/default/default.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { AddDocumentComponent } from './modules/documents/add-document/add-document.component';
 import { DocumentsComponent } from './modules/documents/documents.component';
+import { ShowOneDocumentComponent } from './modules/documents/show-one-document/show-one-document.component';
 import { ShowComponent } from './modules/documents/show/show.component';
 import { ShowUsersComponent } from './modules/users/show-users/show-users.component';
 import { UsersComponent } from './modules/users/users.component';
@@ -33,6 +34,9 @@ const routes: Routes = [{
     }, {
       path: 'add',
       component: AddDocumentComponent
+    }, {
+      path: 'show/:id',
+      component: ShowOneDocumentComponent
     }]
   }]
 }];

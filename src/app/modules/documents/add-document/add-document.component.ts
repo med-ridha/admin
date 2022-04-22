@@ -20,16 +20,33 @@ export class AddDocumentComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   switchCat() {
     this.isHidden = !this.isHidden;
   }
+
+  checkDocument(form: NgForm) {
+
+    if (form.value.categorie == "") {
+      alert('you have to select a category');
+      return;
+    }
+
+    this.documentService.checkDocument(form.value, this.token).subscribe((result: any) => {
+      console.log(result)
+      if (result.result === 'found') {
+        alert('document already in the DB')
+      }
+    })
+  }
+
   onSubmit(form: NgForm) {
 
     if (form.value.categorie == "") {
       alert('you have to select a category');
       return;
     }
-    console.log(form.value)
+
     this.documentService.createDocument(form.value, this.token).subscribe((result: any) => {
       if (result.code == 0) {
         alert("document add" + result.message._id)

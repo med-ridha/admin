@@ -32,7 +32,12 @@ export class WebService {
     return this.http.put(`${this.ROOTURL}/${uri}`, payload);
   }
 
-  delete(uri: string) {
-    return this.http.delete(`${this.ROOTURL}/${uri}`);
+  delete(uri: string, payload: any, token: string) {
+    return this.http.delete(`${this.ROOTURL}/${uri}`,  {
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      },
+      body: payload
+    });
   }
 }

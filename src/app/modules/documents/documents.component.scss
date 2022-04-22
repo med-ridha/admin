@@ -4,6 +4,27 @@ body {
   font-family: 'Varela Round', sans-serif;
   font-size: 13px;
 }
+
+.float-container {
+  display: flex;
+}
+
+.float-child {
+  flex: 1;
+}
+.title{
+  margin-top: 2%;
+}
+.small {
+  max-width: 20%;
+  padding-left: 2%;
+  border-left: 1px solid;
+  //background-color: grey;
+}
+
+.big {
+  margin-right: 20px;
+}
 .container-xl{
   max-width: 100%;
 }

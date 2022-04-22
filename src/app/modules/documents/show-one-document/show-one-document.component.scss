@@ -1,0 +1,24 @@
+.float-container {
+  display: flex;
+}
+
+.float-child {
+  flex: 1;
+}
+.title{
+  margin-top: 2%;
+}
+.red {
+  color: red;
+  background-color: darkred;
+}
+.small {
+  max-width: 20%;
+  padding-left: 2%;
+  border-left: 1px solid;
+  //background-color: grey;
+}
+
+.big {
+  margin-right: 20px;
+}

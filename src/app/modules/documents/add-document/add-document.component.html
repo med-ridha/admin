@@ -9,7 +9,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="form_titleFr">Title Fr</label>
-                  <input id="titleFr" autocomplete='off' ngModel #titleFr="ngModel" type="text" name="titleFr" class="form-control"
+                  <input id="titleFr" (change)='checkDocument(f)' autocomplete='off' ngModel #titleFr="ngModel" type="text" name="titleFr" class="form-control"
                     placeholder="Enter title Fr">
                 </div>
               </div>

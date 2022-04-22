@@ -10,26 +10,19 @@
     </tr>
   </thead>
   <tbody>
-    <!-- <a *ngFor="let document of documents" [routerLink]="['/documents', document._id]" routerLinkActive="is-active"> -->
-    <tr *ngFor="let document of documents">
-      <td *ngIf="document.titleFr !== 'not available'"> {{document.titleFr}}</td>
-      <td *ngIf="document.titleFr === 'not available'"> {{document.titleAr}}</td>
+    <tr  *ngFor="let document of documents" routerLinkActive="Active" [routerLink]="['/documents/show/',document._id]">
+      <td> {{document.titleFr}}</td>
       <td> {{ getMod(document.moduleId) }} </td>
       <td> {{ getCat(document.categoryId) }} </td>
       <td> {{ document.dateAdded }} </td>
       <td>
-        <!-- <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i -->
-        <!--     class="material-icons">&#xE8B8;</i></a> -->
-        <!-- <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i -->
-        <!--     class="material-icons">&#xE5C9;</i></a> -->
         <a mat-list-item>
           <mat-icon>person</mat-icon>
         </a>
-        <a mat-list-item (click)="printdocument(document._id)">
+        <a mat-list-item (click)="deleteDocument(document._id, document.moduleId, document.categoryId)">
           <mat-icon style="color: red">delete</mat-icon>
         </a>
       </td>
     </tr>
-    <!-- </a> -->
   </tbody>
 </table>
