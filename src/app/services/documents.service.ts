@@ -38,7 +38,7 @@ export class DocumentsService {
     return this.webService.delete('documents/delete/' , payload, token);
   }
 
-  updateDocument(documentId: string, payload: any) {
-    return this.webService.put('documents/update/' + documentId, payload);
+  updateDocument(payload: any, token: string) {
+    return this.webService.put('documents/update/', payload, token);
   }
 }

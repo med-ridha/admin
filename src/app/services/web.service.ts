@@ -28,8 +28,12 @@ export class WebService {
     });
   }
 
-  put(uri: string, payload: any) {
-    return this.http.put(`${this.ROOTURL}/${uri}`, payload);
+  put(uri: string, payload: any, token: string) {
+    return this.http.put(`${this.ROOTURL}/${uri}`, payload, {
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      }
+    });
   }
 
   delete(uri: string, payload: any, token: string) {

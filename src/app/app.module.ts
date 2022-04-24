@@ -9,6 +9,7 @@ import { DefaultModule } from './layouts/default/default.module';
 import { AuthModule } from './auth/auth.module';
 import { DocumentsModule } from './modules/documents/documents.module';
 import { UsersModule } from './modules/users/users.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UsersModule } from './modules/users/users.module';
     HttpClientModule,
     AuthModule,
     DocumentsModule,
-    UsersModule
+    UsersModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

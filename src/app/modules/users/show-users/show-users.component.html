@@ -1,5 +1,5 @@
-<h3 class='notfound' *ngIf="users.length == 0">no users found</h3>
-<table *ngIf="users.length > 0" class="table table-striped table-hover">
+<h3 class='notfound' *ngIf="getStaticUsers().length == 0">no users found</h3>
+<table *ngIf="getStaticUsers().length > 0" class="table table-striped table-hover">
   <thead>
     <tr>
       <th>Name</th>
@@ -10,25 +10,19 @@
     </tr>
   </thead>
   <tbody>
-    <!-- <a *ngFor="let user of users" [routerLink]="['/users', user._id]" routerLinkActive="is-active"> -->
-    <tr *ngFor="let user of users">
-      <td> {{user.name}} {{user.surname}} </td>
+    <tr *ngFor="let user of getStaticUsers()">
+      <td> {{ user.name}} {{user.surname}} </td>
       <td> {{ user.email }} </td>
       <td> {{ user.nomStructure }} </td>
       <td> {{ user.phoneNumber }} </td>
       <td>
-        <!-- <a href="#" class="settings" title="Settings" data-toggle="tooltip"><i -->
-        <!--     class="material-icons">&#xE8B8;</i></a> -->
-        <!-- <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i -->
-        <!--     class="material-icons">&#xE5C9;</i></a> -->
-        <a mat-list-item>
+        <a mat-list-item routerLinkActive="Active" [routerLink]="['/users/show/',user._id]" >
           <mat-icon>person</mat-icon>
         </a>
-        <a mat-list-item (click)="printUser(user._id)">
-          <mat-icon style="color: red">delete</mat-icon>
+        <a mat-list-item >
+          <mat-icon style="color: red" (click)="delete(user._id)" >delete</mat-icon>
         </a>
       </td>
     </tr>
-    <!-- </a> -->
   </tbody>
 </table>

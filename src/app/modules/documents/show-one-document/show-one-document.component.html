@@ -5,19 +5,43 @@
         <div class=""></div>
         <div class="">
           <section>
-            <div class="">
+            <div>
+              <div class="switchButtonContainer float-container">
+                <button (click)="lang = true" class="switchlangButtons float-child"> Fr</button>
+                <div style="width: 15px"></div>
+                <button (click)="lang = false" class="switchlangButtons float-child"> Ar</button>
+              </div>
+              <hr style="width: 80%">
               <div>
                 <div class="float-container">
-                  <h1 class="title float-child">{{doc.titleFr}}
-                  </h1>
+                  <div class="title float-child">
+                    <h1>{{lang?doc.titleFr:doc.titleAr}}</h1>
+                  </div>
                   <div style="width: 15%">
                     <div class="float-child modifyButton col-sm-7">
-                      <a href="#" routerLinkActive="Active" routerLink="/documents/add" class="btn btn-secondary"><i
-                          class="material-icons">&#xE3C9;</i> <span>Modify</span></a>
+                      <a href="#" routerLinkActive="Active" [routerLink]='["/documents/modify", doc._id]'
+                        class="btn btn-secondary">
+                        <div class="float-container">
+                          <div class="float-child">
+                            <i class="material-icons">&#xE3C9;</i>
+                          </div>
+                          <div class="float-child text">
+                            <span>Modify</span>
+                          </div>
+                        </div>
+                      </a>
                     </div>
                     <div class="float-child modifyButton col-sm-7">
-                      <a href="#" (click)="deleteDocumentFromup(doc._id, doc.moduleId, doc.categoryId)"
-                        class="red btn btn-secondary"><i class="material-icons">&#xE872;</i> <span>Delete</span></a>
+                      <a (click)="deleteDocumentFromup(doc._id)" class="red btn btn-secondary">
+                        <div class="float-container">
+                          <div class="float-child">
+                            <i class="material-icons">&#xE872;</i>
+                          </div>
+                          <div class="float-child text">
+                            <span>Delete</span>
+                          </div>
+                        </div>
+                      </a>
                     </div>
                   </div>
 
@@ -25,7 +49,7 @@
                 <hr>
                 <div class="float-container">
                   <div class="float-child big">
-                    <p>{{doc.bodyFr}}
+                    <p>{{lang?doc.bodyFr:doc.bodyAr}}
                     </p>
                   </div>
                   <div class="float-child small">

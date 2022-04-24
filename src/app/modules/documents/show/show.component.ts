@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import DocumentJ from 'src/app/models/documentJ';
 import Modules from 'src/app/models/modules';
 import { DocumentsService } from 'src/app/services/documents.service';
+import { DocumentsComponent } from '../documents.component';
 
 @Component({
   selector: 'app-show',
@@ -11,53 +12,67 @@ import { DocumentsService } from 'src/app/services/documents.service';
 })
 export class ShowComponent implements OnInit {
 
-  documents: DocumentJ[] = []
-  constructor(private documentService: DocumentsService, private router: Router) { }
-
+  static documents: DocumentJ[] = []
   modules: Modules[];
 
-  ngOnInit(): void {
-    let token = localStorage.getItem('token') ?? "";
-    this.documentService.getAllModules(token).subscribe((result: any) => {
-      if (result.code == 0) {
-        this.modules = result.message;
-      } else {
-        console.log(result);
-      }
-    })
-    this.documentService.getDocuments(token).subscribe((result: any) => {
-      if (result.code == 0) {
-        this.documents = result.message;
-        this.getMod(this.documents[0].moduleId);
-      } else {
-        console.log(result.message);
-      }
-    })
+  constructor(private documentService: DocumentsService, private router: Router) { }
+
+  getStaticDocuments(){
+    return ShowComponent.documents;
   }
-  deleteDocument(docId: string, modId: string, catId: string) {
-    let answer = confirm('are you sure  you want to delete this document?')
+  async ngOnInit(): Promise<void> {
     let token = localStorage.getItem('token') ?? "";
-    if (answer) {
-      let payload = {
-        "documentId": docId,
-        "moduleId": modId,
-        "categoryId": catId
-      }
-      this.documentService.deleteDocument(payload, token).subscribe((result: any) => {
+    if (!DocumentsComponent.modules) {
+      this.documentService.getAllModules(token).subscribe((result: any) => {
         if (result.code == 0) {
-          this.documentService.getDocuments(token).subscribe((result: any) => {
-            if (result.code == 0) {
-              this.documents = result.message;
-            } else {
-              console.log(result.message);
-            }
-          })
+          this.modules = result.message;
         } else {
-          alert('someting went wrong')
+          console.log(result);
         }
       })
+    } else {
+      this.modules = DocumentsComponent.modules;
+    }
+    if (!DocumentsComponent.documents) {
+      this.documentService.getDocuments(token).subscribe((result: any) => {
+        if (result.code == 0) {
+          //this.documents = result.message;
+              ShowComponent.documents = result.message;
+        } else {
+          console.log(result.message);
+        }
+      })
+    } else {
+      //this.documents = DocumentsComponent.documents;
+              ShowComponent.documents = DocumentsComponent.documents;
     }
   }
+   deleteDocument(docId: string) {
+     let answer = confirm('are you sure  you want to delete this document???')
+     let token = localStorage.getItem('token') ?? "";
+     if (answer) {
+       let payload = {
+         "documentId": docId,
+       }
+       this.documentService.deleteDocument(payload, token).subscribe((result: any) => {
+         if (result.code == 0) {
+           this.documentService.getDocuments(token).subscribe((result: any) => {
+             if (result.code == 0) {
+              // this.documents = result.message;
+              ShowComponent.documents = result.message;
+              DocumentsComponent.documents = result.message;
+             } else {
+               console.log(result.message);
+             }
+           })
+         } else {
+           alert('someting went wrong')
+         }
+       })
+     }else{
+      return;
+    }
+   }
   printdocument(docId: string, modId: string, catId: string) {
     console.log("docId: " + docId);
     console.log("modId: " + modId);

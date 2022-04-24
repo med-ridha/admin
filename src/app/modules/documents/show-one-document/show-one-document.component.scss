@@ -1,7 +1,20 @@
 .float-container {
   display: flex;
 }
-
+.switchButtonContainer {
+  .float-child{
+  max-width: 60px;
+  }
+.switchlangButtons { 
+  font-size: 24px;
+  height: 40px;
+  border: none;
+}
+}
+.modifyButton .text {
+  font-size: 19px;
+  margin-left: 12px;
+}
 .float-child {
   flex: 1;
 }
@@ -9,7 +22,7 @@
   margin-top: 2%;
 }
 .red {
-  color: red;
+  color: white;
   background-color: darkred;
 }
 .small {

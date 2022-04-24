@@ -11,10 +11,15 @@ export class UsersService {
     return this.webService.get('users/all', token);
   }
 
-  getUser(userId: string, token: string) {
-    return this.webService.get(`users/${userId}`, token);
+  getUserCollabs(email: string, token: string) {
+    return this.webService.get(`users/one/collabs/${email}`, token);
   }
-  updateUser(userId: string, payload: any) {
-    return this.webService.put('users/update/' + userId, payload);
+
+  getUser(userId: string, token: string) {
+    return this.webService.get(`users/one/${userId}`, token);
+  }
+
+  deleteUser(userId: string, token: string){
+    return this.webService.delete("users/delete/", {id: userId}, token)
   }
 }

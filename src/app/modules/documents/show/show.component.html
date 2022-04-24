@@ -1,5 +1,5 @@
-<h3 class="notfound" *ngIf="documents.length == 0">no documents found</h3>
-<table *ngIf="documents.length > 0" class="table table-striped table-hover">
+<h3 class="notfound" *ngIf="getStaticDocuments().length == 0">no documents found</h3>
+<table *ngIf="getStaticDocuments().length > 0" class="table table-striped table-hover">
   <thead>
     <tr>
       <th style='width:35%'>title</th>
@@ -10,16 +10,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr  *ngFor="let document of documents" routerLinkActive="Active" [routerLink]="['/documents/show/',document._id]">
+    <tr  *ngFor="let document of getStaticDocuments()" >
       <td> {{document.titleFr}}</td>
       <td> {{ getMod(document.moduleId) }} </td>
       <td> {{ getCat(document.categoryId) }} </td>
-      <td> {{ document.dateAdded }} </td>
+      <td> {{ document.dateAdded.split("T")[0] }} </td>
       <td>
-        <a mat-list-item>
-          <mat-icon>person</mat-icon>
+        <a mat-list-item routerLinkActive="Active" [routerLink]="['/documents/show/',document._id]">
+          <mat-icon>settings</mat-icon>
         </a>
-        <a mat-list-item (click)="deleteDocument(document._id, document.moduleId, document.categoryId)">
+        <a mat-list-item routerLinkActive="Active" (click)="deleteDocument(document._id)">
           <mat-icon style="color: red">delete</mat-icon>
         </a>
       </td>

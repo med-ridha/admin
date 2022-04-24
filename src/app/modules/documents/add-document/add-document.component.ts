@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Categories from 'src/app/models/categories';
 import Modules from 'src/app/models/modules';
 import { DocumentsService } from 'src/app/services/documents.service';
+import { DocumentsComponent } from '../documents.component';
 
 @Component({
   selector: 'app-add-document',
@@ -27,11 +28,6 @@ export class AddDocumentComponent implements OnInit {
 
   checkDocument(form: NgForm) {
 
-    if (form.value.categorie == "") {
-      alert('you have to select a category');
-      return;
-    }
-
     this.documentService.checkDocument(form.value, this.token).subscribe((result: any) => {
       console.log(result)
       if (result.result === 'found') {
@@ -49,8 +45,9 @@ export class AddDocumentComponent implements OnInit {
 
     this.documentService.createDocument(form.value, this.token).subscribe((result: any) => {
       if (result.code == 0) {
-        alert("document add" + result.message._id)
-        //this.router.navigate(['/documents/show'])
+        alert("document add " + result.message._id)
+        DocumentsComponent.getDocuments();
+        this.router.navigate([`/documents/show/${result.message._id}`])
       } else {
         alert('something went wrong');
         console.log(result.message);

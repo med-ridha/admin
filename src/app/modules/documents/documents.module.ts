@@ -6,6 +6,7 @@ import { ShowComponent } from './show/show.component';
 import { AddDocumentComponent } from './add-document/add-document.component';
 import { FormsModule } from '@angular/forms';
 import { ShowOneDocumentComponent } from './show-one-document/show-one-document.component'
+import { ModifyDocumentComponent } from './modify-document/modify-document.component';
 
 
 
@@ -13,7 +14,8 @@ import { ShowOneDocumentComponent } from './show-one-document/show-one-document.
   declarations: [
     ShowComponent,
     AddDocumentComponent,
-    ShowOneDocumentComponent
+    ShowOneDocumentComponent,
+    ModifyDocumentComponent,
   ],
   imports: [
     CommonModule,
@@ -23,10 +25,12 @@ import { ShowOneDocumentComponent } from './show-one-document/show-one-document.
   ],
   exports: [
     ShowComponent,
+    //ShowOneDocumentComponent,
     AddDocumentComponent
   ]
 })
-export class DocumentsModule { }
+export class DocumentsModule {
+}
 
 
 

@@ -3,7 +3,7 @@ export default class User {
     public _id: string,
     public email: string,
     public collabId: string,
-    public listfavored: string,
+    public listfavored: string[],
     public name: string,
     public surname: string,
     public password: string,
@@ -12,7 +12,7 @@ export default class User {
     public nomStructure: string,
     public phoneStructure: string,
     public adressStructure: string,
-    public abonnement: string,
+    public abonnement: string[],
     public notifId: string,
   ) { }
 }

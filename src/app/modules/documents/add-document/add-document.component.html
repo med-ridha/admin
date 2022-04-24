@@ -15,7 +15,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group"> <label for="form_titleAr">Title Ar</label>
-                  <input id="titleAr" autocomplete='off'ngModel #titleAr="ngModel" type="text" name="titleAr" class="form-control"
+                  <input id="titleAr" (change)='checkDocument(f)' autocomplete='off'ngModel #titleAr="ngModel" type="text" name="titleAr" class="form-control"
                     placeholder="Enter title Ar">
                 </div>
               </div>
@@ -81,14 +81,14 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="bodyFr">Body Fr</label>
-                  <textarea ngModel #bodyFr='ngModel' id="bodyFr" name="bodyFr" class="form-control" rows="4">
+                  <textarea ngModel (change)='checkDocument(f)' #bodyFr='ngModel' id="bodyFr" name="bodyFr" class="form-control" rows="4">
                   </textarea>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="bodyAr">Body Ar</label>
-                  <textarea ngModel #bodyAr='ngModel' id="bodyAr" name="bodyAr" class="form-control" rows="4">
+                  <textarea ngModel  (change)='checkDocument(f)' #bodyAr='ngModel' id="bodyAr" name="bodyAr" class="form-control" rows="4">
                   </textarea>
                 </div>
               </div>

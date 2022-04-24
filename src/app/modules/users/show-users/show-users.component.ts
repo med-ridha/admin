@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import User from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
+import { UsersComponent } from '../users.component';
 
 @Component({
   selector: 'app-show-users',
@@ -9,35 +10,53 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class ShowUsersComponent implements OnInit {
 
-  users: User[] = [];
+  static users: User[] = [];
+  token: string = localStorage.getItem('token') ?? "";
 
   constructor(
     private userService: UsersService,
   ) {
   }
 
-  ngOnInit(): void {
-    let token = localStorage.getItem('token') ?? "";
-    this.userService.getUsers(token).subscribe((result: any) => {
-      if (result.code == 0) {
-        console.log(result);
-        this.users = result.message;
-        console.log(this.users[0])
-      } else {
-        console.log(result.message);
-      }
-    })
+  getStaticUsers() {
+    return ShowUsersComponent.users;
   }
 
-  printUser(_id: string) {
-    for (let user of this.users) {
-      if (user._id == _id) console.log(user);
+  ngOnInit(): void {
+    if (UsersComponent.users.length > 0) {
+      ShowUsersComponent.users = UsersComponent.users
+      console.log(this.getStaticUsers())
+    } else {
+      this.userService.getUsers(this.token).subscribe((result: any) => {
+        if (result.code == 0) {
+          ShowUsersComponent.users = result.message;
+          console.log(this.getStaticUsers())
+        } else {
+          console.log(result.message);
+        }
+      })
+
     }
   }
-
-  search: string = ""
-  temp: User[] = [];
-
-
-
+  delete(userId: string) {
+    let answer = confirm("are you sure you want to delete this user?")
+    if (answer) {
+      this.userService.deleteUser(userId, this.token).subscribe((result: any) => {
+        if (result.code == 0) {
+          alert("user deleted!")
+          this.userService.getUsers(this.token).subscribe((result: any) => {
+            if (result.code == 0) {
+              ShowUsersComponent.users = result.message;
+              UsersComponent.users = result.message;
+              console.log(this.getStaticUsers())
+            } else {
+              console.log(result.message);
+            }
+          })
+        }
+      })
+    } else {
+      return
+    }
+  }
 }

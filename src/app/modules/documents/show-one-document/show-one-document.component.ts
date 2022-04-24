@@ -5,6 +5,7 @@ import Categories from 'src/app/models/categories';
 import DocumentJ from 'src/app/models/documentJ';
 import Modules from 'src/app/models/modules';
 import { DocumentsService } from 'src/app/services/documents.service';
+import { DocumentsComponent } from '../documents.component';
 import { ShowComponent } from '../show/show.component';
 
 @Component({
@@ -19,6 +20,10 @@ export class ShowOneDocumentComponent implements OnInit {
   modules: Modules[] = [ new Modules("",0,"",[new Categories("","",[])],0)];
   dateP: string = '';
   token: string = localStorage.getItem('token') ?? "";
+  lang = true;
+  switchLang() {
+    this.lang=!this.lang;
+  }
   constructor(private documentService: DocumentsService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -34,7 +39,7 @@ export class ShowOneDocumentComponent implements OnInit {
       this.documentService.getDocument(docId, this.token).subscribe((result: any) => {
         if (result.code == 0) {
           this.doc = result.message;
-          ShowOneDocumentComponent.docu = result.code;
+          ShowOneDocumentComponent.docu = result.message;
           this.dateAdded = new Date(this.doc.dateAdded).toDateString()
           this.dateP = new Date(this.doc.datePublished).toDateString()
           console.log(this.doc)
@@ -60,30 +65,28 @@ export class ShowOneDocumentComponent implements OnInit {
     return "not found"
   }
 
-  deleteDocumentFromup(docId: string, modId: string, catId: string) {
+  deleteDocumentFromup(docId: string) {
 
-   // let answer = confirm('are you sure  you want to delete this document?')
-   // let token = localStorage.getItem('token') ?? "";
-   // if (answer) {
+    let answer = confirm('are you sure  you want to delete this document?')
+    let token = localStorage.getItem('token') ?? "";
+    if (answer) {
      let payload = {
        "documentId": docId,
-       "moduleId": modId,
-       "categoryId": catId
      }
-    console.log(payload)
-   //   this.documentService.deleteDocument(payload, token).subscribe((result: any) => {
-   //     if (result.code == 0) {
-   //       this.documentService.getDocuments(token).subscribe((result: any) => {
-   //         if (result.code == 0) {
-   //           this.route.navigate(['/documents/show'])
-   //         } else {
-   //           console.log(result.message);
-   //         }
-   //       })
-   //     } else {
-   //       alert('someting went wrong')
-   //     }
-   //   })
-   // }
+      this.documentService.deleteDocument(payload, token).subscribe((result: any) => {
+        if (result.code == 0) {
+          this.documentService.getDocuments(token).subscribe((result: any) => {
+            if (result.code == 0) {
+              DocumentsComponent.documents = result.message;
+              this.router.navigate(['/documents/show'])
+            } else {
+              console.log(result.message);
+            }
+          })
+        } else {
+          alert('someting went wrong')
+        }
+      })
+    }
   }
 }

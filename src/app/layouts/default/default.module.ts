@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { DefaultComponent } from './default.component';
 import { DashboardComponent } from 'src/app/modules/dashboard/dashboard.component';
 import { RouterModule } from '@angular/router';
@@ -22,7 +23,8 @@ import { DocumentsComponent } from 'src/app/modules/documents/documents.componen
     RouterModule,
     SharedModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ]
 })
 export class DefaultModule { }

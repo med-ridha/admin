@@ -1,0 +1,29 @@
+<h3>User details: </h3>
+<div class="float-container">
+  <div class="float-child">
+    <label>name: <span>{{user.name}}</span></label><br>
+    <label>surname: <span>{{user.surname}}</span></label><br>
+    <label>email: <span>{{user.email}}</span></label><br>
+    <label>phone number: <span>{{user.phoneNumber}}</span></label><br>
+  </div>
+  <div class="float-child">
+    <label>numero fiscal: <span>{{user.numFiscal}}</span></label><br>
+    <label>nom structure: <span>{{user.nomStructure}}</span></label><br>
+    <label>phone structure: <span>{{user.phoneStructure}}</span></label><br>
+    <label>adress structure: <span>{{user.adressStructure}}</span></label><br>
+  </div>
+</div>
+<br>
+<hr>
+<div *ngIf="listUsersCollab.length > 0">
+  <h3>Collaborateur: </h3>
+  <label>Collab name: <span>{{collab.name}} <span *ngIf="collab.creator === user.email">(owner)</span></span></label><br>
+  <label>list Collaborateurs: </label><br>
+  <div *ngFor="let user of listUsersCollab">
+    <ul>
+      <li>
+        <a routerLinkActive="Active" [routerLink]="['/users/show/',user.id]" ><span> {{user.fullName}} </span></a>
+      </li>
+    </ul>
+  </div>
+</div>
