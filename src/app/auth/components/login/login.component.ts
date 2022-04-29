@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
     autoClose: false,
     keepAfterRouteChange: false
   }
+  isEmailError : boolean = false;
+  isPasswordError : boolean = false;
 
   constructor(private authService: AuthService, private route: Router) { }
 
@@ -26,7 +28,15 @@ export class LoginComponent implements OnInit {
         await this.route.navigate(['/']);
       },
       error: (err: any) => {
-        console.log(err);
+        if (err === "wrong email"){
+          this.isEmailError = true;
+        this.isPasswordError = false;
+        }
+        if (err === "wrong password"){
+          this.isPasswordError = true;
+          this.isEmailError = false;
+          
+        }
       }
     };
     this.authService.login(f.value).subscribe(loginObserver);

@@ -40,9 +40,9 @@ export class AuthService {
           localStorage.setItem('user', JSON.stringify(user.userToReturn))
           this.decodedToken = this.helper.decodeToken(user.token);
           this.currentUser = user.userToReturn
-
         } else {
-          alert(user.result.message)
+          throw user.result.message
+//          alert(user.result.message)
         }
       }))
   }

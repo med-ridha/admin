@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
   }
 
 
-  onSearchChange(search: any) {
+  findUser(search: any) {
     ShowUsersComponent.users = UsersComponent.users.filter(user => user.name.includes(search))
   }
 }

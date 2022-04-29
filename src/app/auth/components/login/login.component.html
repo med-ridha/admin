@@ -1,4 +1,4 @@
-<div>
+<div style="position: fixed; top:30%; width:100%;">
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="card my-5">
@@ -7,10 +7,12 @@
             <input name="email"
               pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
               ngModel required #email="ngModel" type="text" class="form-control" id="email" placeholder="email">
+            <span *ngIf="isEmailError" style="color: red">wrong email</span>
           </div>
           <div class="form-group">
             <input name="password" pattern=".{8,}" ngModel required #password="ngModel" type="password"
               class="form-control" id="password" placeholder="password">
+            <span *ngIf="isPasswordError" style="color: red">wrong password</span>
           </div>
           <div class="text-center">
             <button type="submit" [disabled]="f.invalid" class="btn btn-color px-5 mb-5 w-100">Login</button>

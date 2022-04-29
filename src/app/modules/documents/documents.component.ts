@@ -111,8 +111,8 @@ export class DocumentsComponent implements OnInit {
   getStaticDocuments(): DocumentJ[]{
     return DocumentsComponent.documents;
   }
-  onSearchChange(search: any) {
-    ShowComponent.documents = DocumentsComponent.documents.filter(doc => doc.titleFr.includes(search))
+  onSearchChange(search: string) {
+    ShowComponent.documents = DocumentsComponent.documents.filter(doc => doc.titleFr.toLowerCase().includes(search.toLowerCase()))
     console.log(search)
   }
   cancelF() {
