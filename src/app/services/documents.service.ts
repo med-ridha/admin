@@ -10,6 +10,10 @@ export class DocumentsService {
     return this.webService.get('documents/all', token);
   }
   
+  getAllSearch(token: string){
+    return this.webService.get('search/all', token)
+  }
+
   getAllModules(token: string){
     return this.webService.get('modules/getAll/', token)
   }

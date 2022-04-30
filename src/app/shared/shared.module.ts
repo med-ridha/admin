@@ -12,6 +12,8 @@ import { MatListModule } from '@angular/material/list'
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { RouterModule } from '@angular/router';
 import { NgProgressModule } from 'ngx-progressbar';
+import { SearchChartComponent } from './widgets/search-chart/search-chart.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -20,8 +22,10 @@ import { NgProgressModule } from 'ngx-progressbar';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
+    SearchChartComponent,
   ],
   imports: [
+    NgChartsModule,
     CommonModule,
     MatDividerModule,
     MatToolbarModule,
@@ -37,6 +41,7 @@ import { NgProgressModule } from 'ngx-progressbar';
     HeaderComponent,
     FooterComponent,
     SidebarComponent,
+    SearchChartComponent,
   ]
 })
 export class SharedModule { }

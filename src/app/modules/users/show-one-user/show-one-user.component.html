@@ -1,29 +1,75 @@
-<h3>User details: </h3>
+<h2>détails de l'utilisateur: </h2>
 <div class="float-container">
-  <div class="float-child">
-    <label>name: <span>{{user.name}}</span></label><br>
-    <label>surname: <span>{{user.surname}}</span></label><br>
-    <label>email: <span>{{user.email}}</span></label><br>
-    <label>phone number: <span>{{user.phoneNumber}}</span></label><br>
+  <div class="float-child ll">
+    <label>Nom: <span>{{user.name}}</span></label><br>
+    <label>Nom famille: <span>{{user.surname}}</span></label><br>
+    <label>Email: <span>{{user.email}}</span></label><br>
+    <label>Numéro de téléphone: <span>{{user.phoneNumber}}</span></label><br>
+    <div style="height: 5%"></div>
+    <hr>
+    <div style="height: 5%"></div>
+    <div *ngIf="listUsersCollab.length > 0">
+      <h2>Collaborateur: </h2>
+      <label>Nom de la Collaboration : <span>{{collab.name}} <span
+            *ngIf="collab.creator === user.email">(owner)</span></span></label><br>
+      <label>list Collaborateurs: </label><br>
+      <div *ngFor="let collabs of listUsersCollab">
+        <ul>
+          <li>
+            <a *ngIf="collabs.email != user.email" routerLinkActive="Active"
+              [routerLink]="['/users/show/',collabs.id]"><span> {{collabs.fullName}} </span></a>
+            <span *ngIf="collabs.email == user.email"> {{collabs.fullName}} </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="float-child ll">
+    <label>numéro fiscal: <span>{{user.numFiscal}}</span></label><br>
+    <label>Nom de la structure: <span>{{user.nomStructure}}</span></label><br>
+    <label>Numéro de téléphone de la structure: <span>{{user.phoneStructure}}</span></label><br>
+    <label>adress de la structure: <span>{{user.adressStructure}}</span></label><br>
   </div>
   <div class="float-child">
-    <label>numero fiscal: <span>{{user.numFiscal}}</span></label><br>
-    <label>nom structure: <span>{{user.nomStructure}}</span></label><br>
-    <label>phone structure: <span>{{user.phoneStructure}}</span></label><br>
-    <label>adress structure: <span>{{user.adressStructure}}</span></label><br>
+    <span>Recherches </span>
+    <div style="width: 95%;">
+      <div>
+        <div style="margin-top: -55px">
+          <canvas style="width: 100px; height: 100px;" baseChart [data]="pieChartData" [type]="pieChartType"
+            [options]="pieChartOptions" [plugins]="pieChartPlugins">
+          </canvas>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <br>
 <hr>
-<div *ngIf="listUsersCollab.length > 0">
-  <h3>Collaborateur: </h3>
-  <label>Collab name: <span>{{collab.name}} <span *ngIf="collab.creator === user.email">(owner)</span></span></label><br>
-  <label>list Collaborateurs: </label><br>
-  <div *ngFor="let user of listUsersCollab">
-    <ul>
-      <li>
-        <a routerLinkActive="Active" [routerLink]="['/users/show/',user.id]" ><span> {{user.fullName}} </span></a>
-      </li>
-    </ul>
-  </div>
-</div>
+<br>
+<hr>
+<div *ngIf="listDocuments.length > 0">
+  <h2>liste favoris: </h2>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th style='width:35%'>title</th>
+        <th>Module</th>
+        <th>Categorie</th>
+        <th style='width:15%'>Date d'ajoute</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let document of listDocuments">
+        <td> {{document.titleFr}}</td>
+        <td> {{ getMod(document.moduleId) }} </td>
+        <td> {{ getCat(document.categoryId) }} </td>
+        <td> {{ document.dateAdded.split("T")[0] }} </td>
+        <td>
+          <a mat-list-item routerLinkActive="Active" [routerLink]="['/documents/show/',document._id]">
+            <mat-icon>settings</mat-icon>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>

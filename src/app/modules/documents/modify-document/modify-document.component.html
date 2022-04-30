@@ -1,4 +1,4 @@
-<h3> Modify Document</h3>
+<h3> Modifier Document</h3>
 <div class="">
   <div class="col-lg-7 mx-auto">
     <div class="card mt-2 mx-auto bg-light">
@@ -9,14 +9,14 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="form_titleFr">Title Fr</label>
-                  <input id="titleFr" (change)='checkDocument(f)' autocomplete='off' ngModel #titleFr="ngModel"
+                  <input id="titleFr" (change)='checkTitleFrDocument(f.value.titleFr)' autocomplete='off' ngModel #titleFr="ngModel"
                     type="text" name="titleFr" class="form-control" placeholder="Enter title Fr"
                     [ngModel]="doc.titleFr">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group"> <label for="form_titleAr">Title Ar</label>
-                  <input id="titleAr" (change)='checkDocument(f)' autocomplete='off' ngModel #titleAr="ngModel"
+                  <input id="titleAr" (change)='checkTitleArDocument(f.value.titleAr)' autocomplete='off' ngModel #titleAr="ngModel"
                     type="text" name="titleAr" class="form-control" placeholder="Enter title Ar"
                     [ngModel]="doc.titleAr">
                 </div>

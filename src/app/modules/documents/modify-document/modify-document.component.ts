@@ -21,7 +21,7 @@ export class ModifyDocumentComponent implements OnInit {
   token: string = localStorage.getItem('token') ?? "";
   dateAdded: string;
   datePu: string;
-  catName: string ;
+  catName: string;
   constructor(private router: ActivatedRoute, private documentService: DocumentsService, private route: Router) { }
 
   ngOnInit(): void {
@@ -50,15 +50,44 @@ export class ModifyDocumentComponent implements OnInit {
 
   checkDocument(form: NgForm) {
 
-    let payload = form.value;
+    //let payload = form.value;
+    let payload: any = []
     payload['docId'] = this.doc._id;
     console.log(payload)
-    this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
-      console.log(result)
-      if (result.result === 'found') {
-        alert('document already in the DB')
-      }
-    })
+    console.log(form)
+    // this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
+    //   console.log(result)
+    //   if (result.result === 'found') {
+    //     alert('document already in the DB')
+    //   }
+    // })
+
+  }
+
+  checkTitleFrDocument(form: NgForm) {
+    let payload: any = {};
+    payload['titleFr'] = form
+    payload['docId'] = this.doc._id;
+    console.log(payload)
+     this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
+       console.log(result)
+       if (result.result === 'found') {
+         alert('document already in the DB')
+       }
+     })
+  }
+
+  checkTitleArDocument(form: NgForm) {
+    let payload: any = {};
+    payload['titleAr'] = form
+    payload['docId'] = this.doc._id;
+    console.log(payload)
+     this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
+       console.log(result)
+       if (result.result === 'found') {
+         alert('document already in the DB')
+       }
+     })
 
   }
 
@@ -68,16 +97,16 @@ export class ModifyDocumentComponent implements OnInit {
       alert('you have to select a category');
       return;
     }
-    let  payload = {
+    let payload = {
       docId: this.doc._id,
       payload: form.value
     }
     console.log(form.value);
-    this.documentService.updateDocument(payload, this.token).subscribe((result: any) =>{
+    this.documentService.updateDocument(payload, this.token).subscribe((result: any) => {
       if (result.code === 0) {
         alert("updated")
         this.route.navigate([`documents/show/${this.doc._id}`])
-      }else {
+      } else {
         alert("something went wrong");
         console.log(result)
       }
@@ -104,9 +133,9 @@ export class ModifyDocumentComponent implements OnInit {
         this.modules = result.message
         this.categories = this.modules.categories
         for (let cat of this.categories) {
-          for (let docId of cat.documentsIds){
+          for (let docId of cat.documentsIds) {
             if (docId == this.doc._id) this.catName = cat.name;
-          } 
+          }
         }
       } else {
         alert('something went wrong');

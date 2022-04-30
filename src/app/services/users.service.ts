@@ -15,6 +15,13 @@ export class UsersService {
     return this.webService.get(`users/one/collabs/${email}`, token);
   }
 
+  getUserSearchH(email: string, token: string) {
+    return this.webService.get(`users/one/searchH/${email}`, token);
+  }
+
+  getUserFavorit(email: string, token: string) {
+    return this.webService.get(`users/one/favorit/${email}`, token);
+  }
   getUser(userId: string, token: string) {
     return this.webService.get(`users/one/${userId}`, token);
   }

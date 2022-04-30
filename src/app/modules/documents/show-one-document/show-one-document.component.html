@@ -19,26 +19,26 @@
                   </div>
                   <div style="width: 15%">
                     <div class="float-child modifyButton col-sm-7">
-                      <a href="#" routerLinkActive="Active" [routerLink]='["/documents/modify", doc._id]'
+                      <a style = "width: 180px"  href="#" routerLinkActive="Active" [routerLink]='["/documents/modify", doc._id]'
                         class="btn btn-secondary">
                         <div class="float-container">
                           <div class="float-child">
                             <i class="material-icons">&#xE3C9;</i>
                           </div>
                           <div class="float-child text">
-                            <span>Modify</span>
+                            <span>Modifier</span>
                           </div>
                         </div>
                       </a>
                     </div>
-                    <div class="float-child modifyButton col-sm-7">
-                      <a (click)="deleteDocumentFromup(doc._id)" class="red btn btn-secondary">
+                    <div  class="float-child modifyButton col-sm-7">
+                      <a (click)="deleteDocumentFromup(doc._id)" style = "width: 180px" class="red btn btn-secondary">
                         <div class="float-container">
                           <div class="float-child">
                             <i class="material-icons">&#xE872;</i>
                           </div>
                           <div class="float-child text">
-                            <span>Delete</span>
+                            <span>Supprimer</span>
                           </div>
                         </div>
                       </a>

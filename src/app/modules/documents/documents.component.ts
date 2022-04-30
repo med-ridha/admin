@@ -19,7 +19,7 @@ export class DocumentsComponent implements OnInit {
   show: boolean = false;
   cancel: boolean = false;
   docId: string
-  static docS: DocumentsService;
+  static docS: DocumentsService ;
   isSearch: boolean;
 
   constructor(private route: Router, private documentService: DocumentsService) {
@@ -109,7 +109,7 @@ export class DocumentsComponent implements OnInit {
     this.show = !this.show;
   }
   getStaticDocuments(): DocumentJ[]{
-    return DocumentsComponent.documents;
+    return DocumentsComponent.documents ?? [];
   }
   onSearchChange(search: string) {
     ShowComponent.documents = DocumentsComponent.documents.filter(doc => doc.titleFr.toLowerCase().includes(search.toLowerCase()))

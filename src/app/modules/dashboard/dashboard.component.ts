@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  pieChart : any = [];
+
   constructor() { }
 
+  token: string = localStorage.getItem('token') ?? ''
   ngOnInit(): void {
   }
 

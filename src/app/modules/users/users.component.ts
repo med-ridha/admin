@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
   url: NavigationEnd;
 
   constructor(
-    private userService: UsersService,private route: Router
+    private userService: UsersService, private route: Router
   ) {
   }
 
