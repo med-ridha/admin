@@ -9,13 +9,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="form_titleFr">Title Fr</label>
-                  <input id="titleFr" (change)='checkDocument(f)' autocomplete='off' ngModel #titleFr="ngModel" type="text" name="titleFr" class="form-control"
+                  <input id="titleFr" required (change)='checkDocument(f)' autocomplete='off' ngModel #titleFr="ngModel" type="text" name="titleFr" class="form-control"
                     placeholder="Enter title Fr">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group"> <label for="form_titleAr">Title Ar</label>
-                  <input id="titleAr" (change)='checkDocument(f)' autocomplete='off'ngModel #titleAr="ngModel" type="text" name="titleAr" class="form-control"
+                  <input id="titleAr" required (change)='checkDocument(f)' autocomplete='off'ngModel #titleAr="ngModel" type="text" name="titleAr" class="form-control"
                     placeholder="Enter title Ar">
                 </div>
               </div>
@@ -66,7 +66,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="dateP">Date publie</label>
-                  <input id="dateP" ngModel #dateP="ngModel" type="date" name="dateP" class="form-control">
+                  <input id="dateP" required ngModel #dateP="ngModel" type="date" name="dateP" class="form-control">
                 </div>
               </div>
               <div class="col-md-6">
@@ -81,14 +81,14 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="bodyFr">Body Fr</label>
-                  <textarea ngModel (change)='checkDocument(f)' #bodyFr='ngModel' id="bodyFr" name="bodyFr" class="form-control" rows="4">
+                  <textarea ngModel required (change)='checkDocument(f)' #bodyFr='ngModel' id="bodyFr" name="bodyFr" class="form-control" rows="4">
                   </textarea>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="bodyAr">Body Ar</label>
-                  <textarea ngModel  (change)='checkDocument(f)' #bodyAr='ngModel' id="bodyAr" name="bodyAr" class="form-control" rows="4">
+                  <textarea ngModel required  (change)='checkDocument(f)' #bodyAr='ngModel' id="bodyAr" name="bodyAr" class="form-control" rows="4">
                   </textarea>
                 </div>
               </div>

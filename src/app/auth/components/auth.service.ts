@@ -22,13 +22,35 @@ export class AuthService {
           'Authorization': "Bearer " + token,
         }
       }).pipe(
-        map((res: any) => {
+        map(() => {
         })
       );
-
     } catch (err) {
       return err
     }
+  }
+
+  checkResetToken(token: string, email: string, password: string) {
+    return this.http.post(this.authUrl + "checkResetToken", { "email": email, "token": token, "password": password }).pipe(
+      map((response: any) => {
+        console.log(response);
+        if (response.code == 0) {
+        } else {
+          throw response.message
+        }
+      }))
+  }
+
+  checkEmail(email: string) {
+    console.log(email);
+    return this.http.post(this.authUrl + "checkEmail", { "email": email }).pipe(
+      map((response: any) => {
+        console.log(response);
+        if (response.code == 0) {
+        } else {
+          throw response.message
+        }
+      }))
   }
 
   login(model: any) {
@@ -42,7 +64,6 @@ export class AuthService {
           this.currentUser = user.userToReturn
         } else {
           throw user.result.message
-//          alert(user.result.message)
         }
       }))
   }

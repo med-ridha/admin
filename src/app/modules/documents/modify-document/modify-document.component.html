@@ -9,16 +9,16 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="form_titleFr">Title Fr</label>
-                  <input id="titleFr" (change)='checkTitleFrDocument(f.value.titleFr)' autocomplete='off' ngModel #titleFr="ngModel"
-                    type="text" name="titleFr" class="form-control" placeholder="Enter title Fr"
-                    [ngModel]="doc.titleFr">
+                  <input id="titleFr" required (change)='checkTitleFrDocument(f.value.titleFr)' autocomplete='off'
+                    ngModel #titleFr="ngModel" type="text" name="titleFr" class="form-control"
+                    placeholder="Enter title Fr" [ngModel]="doc.titleFr">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group"> <label for="form_titleAr">Title Ar</label>
-                  <input id="titleAr" (change)='checkTitleArDocument(f.value.titleAr)' autocomplete='off' ngModel #titleAr="ngModel"
-                    type="text" name="titleAr" class="form-control" placeholder="Enter title Ar"
-                    [ngModel]="doc.titleAr">
+                  <input id="titleAr" required (change)='checkTitleArDocument(f.value.titleAr)' autocomplete='off'
+                    ngModel #titleAr="ngModel" type="text" name="titleAr" class="form-control"
+                    placeholder="Enter title Ar" [ngModel]="doc.titleAr">
                 </div>
               </div>
             </div>
@@ -26,12 +26,13 @@
               <div class="col-md-6">
                 <div class="form-group"> <label for="moduleNum">Module</label>
                   <select *ngIf="modules" required="required" ngModel #moduleNum="ngModel"
-                    (change)="getCategories(moduleNum.value)" [ngModel]='modules.id' id="moduleNum" name="moduleNum" class="form-control"
-                    required="required">
+                    (change)="getCategories(moduleNum.value)" [ngModel]='modules.id' id="moduleNum" name="moduleNum"
+                    class="form-control" required="required">
                     <option [selected]="'Fiscal' == modules.name" value="1">Fiscal</option>
                     <option [selected]="'Social' == modules.name" value="2">Social</option>
                     <option [selected]="'Investissement' == modules.name" value="3">Investissement</option>
-                    <option [selected]="'Banque-Finances-Assurances' == modules.name" value="4">Banque-Finances-Assurances</option>
+                    <option [selected]="'Banque-Finances-Assurances' == modules.name" value="4">
+                      Banque-Finances-Assurances</option>
                     <option [selected]="'BIBUS' == modules.name" value="5">BIBUS</option>
                     <option [selected]="'Collectivites' == modules.name" value="6">Collectivites locales</option>
                     <option [selected]="'Veille Juridique' == modules.name" value="7">Veille Juridique</option>
@@ -46,8 +47,8 @@
                     <mat-icon>add</mat-icon>
                   </a>
                   <select *ngIf="categories.length > 0" ngModel #categoryName="ngModel" id="categoryName"
-                    name="categoryName" class="form-control" required="!isHidden"  [ngModel]='catName'>
-                    <option *ngFor="let item of categories" [selected]="item.name === catName" >{{item.name}}</option>
+                    name="categoryName" class="form-control" required="!isHidden" [ngModel]='catName'>
+                    <option *ngFor="let item of categories" [selected]="item.name === catName">{{item.name}}</option>
                   </select>
                 </div>
               </div>
@@ -67,15 +68,15 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="dateP">Date publie</label>
-                  <input id="dateP" ngModel #dateP="ngModel" type="date" [ngModel]="datePu" name="dateP"
+                  <input id="dateP" required ngModel #dateP="ngModel" type="date" [ngModel]="datePu" name="dateP"
                     class="form-control">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="ref">Ref</label>
-                  <input id="ref"  ngModel #ref="ngModel" autocomplete='off' type="text" name="ref"
-                    class="form-control" placeholder="Enter ref" required [ngModel]="doc.ref">
+                  <input id="ref" ngModel #ref="ngModel" autocomplete='off' type="text" name="ref" class="form-control"
+                    placeholder="Enter ref" required [ngModel]="doc.ref">
                 </div>
               </div>
             </div>
@@ -83,16 +84,16 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="bodyFr">Body Fr</label>
-                  <textarea ngModel  (change)='checkDocument(f)' #bodyFr='ngModel' id="bodyFr"
-                    name="bodyFr" class="form-control" rows="4" [ngModel]="doc.bodyFr">
+                  <textarea ngModel required (change)='checkDocument(f)' #bodyFr='ngModel' id="bodyFr" name="bodyFr"
+                    class="form-control" rows="4" [ngModel]="doc.bodyFr">
                   </textarea>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="bodyAr">Body Ar</label>
-                  <textarea ngModel (change)='checkDocument(f)' #bodyAr='ngModel' id="bodyAr"
-                    name="bodyAr" class="form-control" rows="4"  [ngModel]="doc.bodyAr">
+                  <textarea ngModel required (change)='checkDocument(f)' #bodyAr='ngModel' id="bodyAr" name="bodyAr"
+                    class="form-control" rows="4" [ngModel]="doc.bodyAr">
                   </textarea>
                 </div>
               </div>

@@ -23,7 +23,6 @@ export class ModifyDocumentComponent implements OnInit {
   datePu: string;
   catName: string;
   constructor(private router: ActivatedRoute, private documentService: DocumentsService, private route: Router) { }
-
   ngOnInit(): void {
     this.router.params.subscribe((params: Params) => {
       let docId = params['id'];
