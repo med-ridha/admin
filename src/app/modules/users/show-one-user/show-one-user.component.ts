@@ -21,8 +21,10 @@ export class ShowOneUserComponent implements OnInit {
 
   user: User = new User("", "", "", [], "", "", "", "", "", "", "", "", [], "");
   collab: Collab = new Collab("", [], new Date(), "");
-  listDocuments: DocumentJ[] = [] ;
+  listDocuments: DocumentJ[] = [];
   modules: Modules[];
+  listAbonn: any = [];
+  count : number = 0;
 
   listUsersCollab: any = [];
   constructor(private documentService: DocumentsService, private route: ActivatedRoute, private userService: UsersService) { }
@@ -37,11 +39,11 @@ export class ShowOneUserComponent implements OnInit {
         position: 'right',
       },
       datalabels: {
-        formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
-        },
+       // formatter: (value, ctx) => {
+       //   if (ctx.chart.data.labels) {
+       //     return ctx.chart.data.labels[ctx.dataIndex];
+       //   }
+       // },
       },
     }
   };
@@ -75,30 +77,44 @@ export class ShowOneUserComponent implements OnInit {
             if (result.code == 0) {
               this.collab = result.message.collab;
               this.listUsersCollab = result.message.listUsers;
-              for (let i of result.message.listUsers) {
-                console.log(i)
-              }
             }
           })
           this.userService.getUserFavorit(this.user.email, this.token).subscribe((result: any) => {
+            this.listDocuments = [];
             if (result.code == 0) {
               this.listDocuments = result.message;
             } else {
-              console.log(result);
+              console.log(result)
             }
           })
           this.userService.getUserSearchH(this.user.email, this.token).subscribe((result: any) => {
+            this.pieChartData.labels = []
+            this.pieChartData.datasets[0].data = []
             if (result.code == 0) {
+              this.count = result.message.length;
               let aboutie = result.message.filter((x: any) => x.foundResult == true).length;
               let nonAboutie = result.message.filter((x: any) => x.foundResult == false).length;
-              console.log(aboutie)
-              console.log(nonAboutie)
-              this.pieChartData.labels?.push("aboutie")
+              this.pieChartData.labels?.push(`aboutie`)
               this.pieChartData.datasets[0].data.push(aboutie);
-              this.pieChartData.labels?.push("non aboutie")
+              this.pieChartData.labels?.push(`non aboutie`)
               this.pieChartData.datasets[0].data.push(nonAboutie);
               this.chart?.update();
             } else {
+            }
+          })
+          this.userService.getUserAbonn(this.user.email, this.token).subscribe((result: any) => {
+            this.listAbonn = [];
+            if (result.code == 0) {
+              let listAbonn = result.message;
+              for (let abonn of listAbonn) {
+                for (let module of abonn.modules) {
+                  this.listAbonn.push({
+                    name: module,
+                    dateStart: abonn.dateStart.split("T")[0],
+                    dateFinish: abonn.dateFinish.split("T")[0]
+                  })
+                }
+              }
             }
           })
         } else {

@@ -13,7 +13,8 @@
                   <form #f="ngForm" style="margin-left:auto; max-width:fit-content">
                     <div class="inner-form">
                       <div class="input-field second-wrap">
-                        <input (input)="findUser(f.value.search)" name="search" ngModel #search="ngModel" id="search" type="text" placeholder="Enter Keywords?" />
+                        <input (input)="findUser(f.value.search)" name="search" ngModel #search="ngModel" id="search"
+                          type="text" placeholder="Enter Keywords?" />
                       </div>
                       <div class="input-field third-wrap">
                         <button class="btn-search" type="button">
@@ -29,11 +30,27 @@
                   </form>
                 </div>
               </div>
+              <div class='float-container' style="margin-left: auto">
+                <div style="max-width: 66%; margin-left: auto" class="float-child float-container">
+                  <div *ngIf="user" style="margin-left: auto; max-width:50%" class="buttonSize float-child col-sm-7">
+                    <a (click)="delete(this.userId)" class="btn btn-secondary" style="background-color: red">
+                      <div class="float-container" style="color: white">
+                        <div class="float-child">
+                            <i class="material-icons">&#xE872;</i>
+                        </div>
+                        <div class="float-child">
+                          <span>Delete</span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          </div>
+          <router-outlet></router-outlet>
         </div>
-        <router-outlet></router-outlet>
       </div>
     </div>
-  </div>
 </body>

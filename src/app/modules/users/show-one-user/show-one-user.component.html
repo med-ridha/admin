@@ -6,10 +6,11 @@
     <label>Email: <span>{{user.email}}</span></label><br>
     <label>Numéro de téléphone: <span>{{user.phoneNumber}}</span></label><br>
     <div style="height: 5%"></div>
-    <hr>
+    <hr style="height: 2px">
     <div style="height: 5%"></div>
+    <h2>Collaborateur: </h2>
+    <div *ngIf="listUsersCollab.length == 0"><span>Utilisateur n'a pas de collaborateurs</span></div>
     <div *ngIf="listUsersCollab.length > 0">
-      <h2>Collaborateur: </h2>
       <label>Nom de la Collaboration : <span>{{collab.name}} <span
             *ngIf="collab.creator === user.email">(owner)</span></span></label><br>
       <label>list Collaborateurs: </label><br>
@@ -30,9 +31,10 @@
     <label>Numéro de téléphone de la structure: <span>{{user.phoneStructure}}</span></label><br>
     <label>adress de la structure: <span>{{user.adressStructure}}</span></label><br>
   </div>
-  <div class="float-child">
-    <span>Recherches </span>
-    <div style="width: 95%;">
+  <div class="float-child ll">
+    <h3>Recherches </h3>
+    <div *ngIf="count == 0"><span>Utilisateur n'a effectue aucune recherche</span></div>
+    <div *ngIf="count > 0" style="width: 95%;">
       <div>
         <div style="margin-top: -55px">
           <canvas style="width: 100px; height: 100px;" baseChart [data]="pieChartData" [type]="pieChartType"
@@ -45,10 +47,31 @@
 </div>
 <br>
 <hr>
+<h2>liste abonnements: </h2>
+<div *ngIf="listAbonn.length == 0"><span>Utilisateur n'a pas d'abonnements</span></div>
+<div *ngIf="listAbonn.length > 0">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th style="width: 33%">Module</th>
+        <th style="width: 33%">Date d'achat</th>
+        <th style="width: 33%">Date d'expiration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let abonn of listAbonn">
+        <td> {{ abonn.name }}</td>
+        <td> {{ abonn.dateStart }} </td>
+        <td> {{ abonn.dateFinish }} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <br>
 <hr>
+<h2>liste favoris: </h2>
+<div *ngIf="listDocuments.length == 0"><span>Utilisateur n'a pas de favoris</span></div>
 <div *ngIf="listDocuments.length > 0">
-  <h2>liste favoris: </h2>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -73,3 +96,4 @@
       </tr>
     </tbody>
   </table>
+</div>

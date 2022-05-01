@@ -20,11 +20,11 @@ export class SearchChartComponent implements OnInit {
         position: 'top',
       },
       datalabels: {
-        formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
-        },
+       // formatter: (value, ctx) => {
+       //   if (ctx.chart.data.labels) {
+       //     return ctx.chart.data.labels[ctx.dataIndex];
+       //   }
+       // },
       },
     }
   };

@@ -1,4 +1,26 @@
-<div>
+<div style="width: 25%; margin: 0 auto;">
   <span>Search Data</span>
   <app-search-chart></app-search-chart>
+</div>
+<div>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th style='width:35%'>Utilisateur</th>
+        <th>mot cle</th>
+        <th>exacte</th>
+        <th style='width:15%'>Date</th>
+        <th>status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let search of searchH">
+        <td><a  routerLinkActive="Active" [routerLink]="['/users/show/',getUserId(search.email)]" >{{search.email}}</a></td>
+        <td>{{getSearchTerm(search.searchString)}}</td>
+        <td>{{getExacte(search.searchString)}}</td>
+        <td>{{getDate(search.dateSearch)}}</td>
+        <td>{{getAboutie(search.foundResult)}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

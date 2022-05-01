@@ -7,6 +7,7 @@ import { WebService } from './web.service'
 
 export class UsersService {
   constructor(private webService: WebService) { }
+
   getUsers(token: string) {
     return this.webService.get('users/all', token);
   }
@@ -17,6 +18,10 @@ export class UsersService {
 
   getUserSearchH(email: string, token: string) {
     return this.webService.get(`users/one/searchH/${email}`, token);
+  }
+
+  getUserAbonn(email: string, token: string) {
+    return this.webService.get(`users/one/abonn/${email}`, token);
   }
 
   getUserFavorit(email: string, token: string) {
