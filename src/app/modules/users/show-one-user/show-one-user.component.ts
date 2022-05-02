@@ -87,7 +87,7 @@ export class ShowOneUserComponent implements OnInit {
               console.log(result)
             }
           })
-          this.userService.getUserSearchH(this.user.email, this.token).subscribe((result: any) => {
+          this.userService.getUserSearchH(this.user._id, this.token).subscribe((result: any) => {
             this.pieChartData.labels = []
             this.pieChartData.datasets[0].data = []
             if (result.code == 0) {

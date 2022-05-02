@@ -26,6 +26,10 @@ export class DocumentsService {
     return this.webService.get('modules/getModule/'+moduleId, token)
   }
 
+  findDocument(search: string, token: string) {
+    return this.webService.get(`documents/search${search}`, token);
+  }
+
   getDocument(documentId: string, token: string) {
     return this.webService.get(`documents/one/${documentId}`, token);
   }

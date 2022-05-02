@@ -19,7 +19,7 @@ export class DocumentsComponent implements OnInit {
   show: boolean = false;
   cancel: boolean = false;
   docId: string
-  static docS: DocumentsService ;
+  static docS: DocumentsService;
   isSearch: boolean;
 
   constructor(private route: Router, private documentService: DocumentsService) {
@@ -44,16 +44,16 @@ export class DocumentsComponent implements OnInit {
       }
     })
   }
+  token: string = localStorage.getItem('token') ?? "";
   ngOnInit(): void {
-    let token = localStorage.getItem('token') ?? "";
-    this.documentService.getAllModules(token).subscribe((result: any) => {
+    this.documentService.getAllModules(this.token).subscribe((result: any) => {
       if (result.code == 0) {
         DocumentsComponent.modules = result.message;
       } else {
         console.log(result);
       }
     })
-    this.documentService.getDocuments(token).subscribe((result: any) => {
+    this.documentService.getDocuments(this.token).subscribe((result: any) => {
       if (result.code == 0) {
         DocumentsComponent.documents = result.message;
       } else {
@@ -108,12 +108,23 @@ export class DocumentsComponent implements OnInit {
   toggleButtons() {
     this.show = !this.show;
   }
-  getStaticDocuments(): DocumentJ[]{
+  getStaticDocuments(): DocumentJ[] {
     return DocumentsComponent.documents ?? [];
   }
-  onSearchChange(search: string) {
-    ShowComponent.documents = DocumentsComponent.documents.filter(doc => doc.titleFr.toLowerCase().includes(search.toLowerCase()))
+  findDocument(form: NgForm) {
+    let search = "?";
+    if (form.value.search.length > 0) search += "search=" + form.value.search + "&"
+    if (form.value.moduleNum.length > 0) search += "module=" + form.value.moduleNum
     console.log(search)
+    this.documentService.findDocument(search, this.token).subscribe((result: any) => {
+      if (result.code == 0) {
+        ShowComponent.documents = result.message;
+      }
+      else {
+        ShowComponent.documents = DocumentsComponent.documents;
+      }
+    })
+    //ShowComponent.documents = DocumentsComponent.documents.filter(doc => doc.titleFr.toLowerCase().includes(search.toLowerCase()))
   }
   cancelF() {
     this.route.navigate(['/documents/show/' + this.docId]);

@@ -37,9 +37,10 @@
     <div *ngIf="count > 0" style="width: 95%;">
       <div>
         <div style="margin-top: -55px">
-          <canvas style="width: 100px; height: 100px;" baseChart [data]="pieChartData" [type]="pieChartType"
+          <a [routerLink]="['/history/one/',user._id]"><canvas style="width: 100px; height: 100px;" baseChart [data]="pieChartData" [type]="pieChartType"
             [options]="pieChartOptions" [plugins]="pieChartPlugins">
           </canvas>
+          </a>
         </div>
       </div>
     </div>

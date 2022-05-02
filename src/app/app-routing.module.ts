@@ -19,7 +19,10 @@ const routes: Routes = [{
   component: DefaultComponent,
   children: [{
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+    children: [
+      { path: 'history/one/:id', component: DashboardComponent },
+    ]
   }, {
     path: 'users',
     component: UsersComponent,
@@ -44,7 +47,7 @@ const routes: Routes = [{
       component: ShowOneDocumentComponent
     }, {
       path: 'modify/:id',
-      component: ModifyDocumentComponent 
+      component: ModifyDocumentComponent
     }]
   }]
 }];

@@ -81,6 +81,15 @@ export class UsersComponent implements OnInit {
   }
 
   findUser(search: any) {
-    ShowUsersComponent.users = UsersComponent.users.filter(user => user.name.includes(search))
+    if (search.length > 1) {
+      this.userService.findUser(search, this.token).subscribe((result: any) => {
+        if (result.code == 0) {
+          ShowUsersComponent.users = result.message;
+        }
+      })
+    }
+    if (search.length <= 1) {
+      ShowUsersComponent.users = UsersComponent.users
+    }
   }
 }

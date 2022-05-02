@@ -12,12 +12,16 @@ export class UsersService {
     return this.webService.get('users/all', token);
   }
 
+  findUser(search: string, token: string) {
+    return this.webService.get(`users/search/${search}`, token);
+  }
+
   getUserCollabs(email: string, token: string) {
     return this.webService.get(`users/one/collabs/${email}`, token);
   }
 
-  getUserSearchH(email: string, token: string) {
-    return this.webService.get(`users/one/searchH/${email}`, token);
+  getUserSearchH(id: string, token: string) {
+    return this.webService.get(`users/one/searchH/${id}`, token);
   }
 
   getUserAbonn(email: string, token: string) {
