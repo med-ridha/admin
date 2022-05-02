@@ -109,7 +109,7 @@ export class DocumentsComponent implements OnInit {
     this.show = !this.show;
   }
   getStaticDocuments(): DocumentJ[] {
-    return DocumentsComponent.documents ?? [];
+    return ShowComponent.documents ?? [];
   }
   findDocument(form: NgForm) {
     let search = "?";
