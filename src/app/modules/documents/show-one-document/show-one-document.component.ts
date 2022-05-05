@@ -14,15 +14,15 @@ import { ShowComponent } from '../show/show.component';
   styleUrls: ['./show-one-document.component.scss']
 })
 export class ShowOneDocumentComponent implements OnInit {
-  static docu : DocumentJ;
+  static docu: DocumentJ;
   doc: DocumentJ = new DocumentJ("", "", "", "", "", "", "", "", "", "");
   dateAdded: string = '';
-  modules: Modules[] = [ new Modules("",0,"",[new Categories("","",[])],0)];
+  modules: Modules[] = [new Modules("", 0, "", [new Categories("", "", [])], 0)];
   dateP: string = '';
   token: string = localStorage.getItem('token') ?? "";
   lang = true;
   switchLang() {
-    this.lang=!this.lang;
+    this.lang = !this.lang;
   }
   constructor(private documentService: DocumentsService, private router: Router, private route: ActivatedRoute) { }
 
@@ -32,6 +32,15 @@ export class ShowOneDocumentComponent implements OnInit {
         this.modules = result.message;
       } else {
         console.log(result);
+      }
+    })
+    DocumentsComponent.docS.getDocuments(this.token).subscribe((result: any) => {
+      console.log(result)
+      if (result.code == 0) {
+        DocumentsComponent.documents = result.message;
+        ShowComponent.documents = result.message;
+      } else {
+        console.log(result.message);
       }
     })
     this.route.params.subscribe((params: Params) => {
@@ -70,9 +79,9 @@ export class ShowOneDocumentComponent implements OnInit {
     let answer = confirm('are you sure  you want to delete this document?')
     let token = localStorage.getItem('token') ?? "";
     if (answer) {
-     let payload = {
-       "documentId": docId,
-     }
+      let payload = {
+        "documentId": docId,
+      }
       this.documentService.deleteDocument(payload, token).subscribe((result: any) => {
         if (result.code == 0) {
           this.documentService.getDocuments(token).subscribe((result: any) => {

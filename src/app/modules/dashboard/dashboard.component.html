@@ -15,7 +15,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let search of searchH">
-        <td><a  routerLinkActive="Active" [routerLink]="['/users/show/',getUserId(search.email)]" >{{search.email}}</a></td>
+        <td *ngIf="getUserId(search.email).length > 0"><a  [routerLinkActive]="'Active'" [routerLink]="['/users/show/',getUserId(search.email)]" >{{search.email}}</a></td>
+        <td *ngIf="getUserId(search.email).length == 0">{{search.email}} (deleted)</td>
         <td>{{getSearchTerm(search.searchString)}}</td>
         <td>{{getExacte(search.searchString)}}</td>
         <td>{{getDate(search.dateSearch)}}</td>
