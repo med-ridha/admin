@@ -35,6 +35,14 @@ export class UsersComponent implements OnInit {
     }
     if (this.route.url == '/users/show') {
       this.isSearch = true;
+      this.userService.getUsers(this.token).subscribe((result: any) => {
+        if (result.code == 0) {
+          console.log(result);
+          UsersComponent.users = result.message;
+        } else {
+          console.log(result.message);
+        }
+      })
     } else {
       this.isSearch = false;
     }
@@ -47,6 +55,14 @@ export class UsersComponent implements OnInit {
       }
     })
     this.route.events.subscribe((val: any) => {
+      this.userService.getUsers(this.token).subscribe((result: any) => {
+        if (result.code == 0) {
+          console.log(result);
+          UsersComponent.users = result.message;
+        } else {
+          console.log(result.message);
+        }
+      })
       if (val instanceof NavigationEnd) {
         this.url = val;
         if (this.url.urlAfterRedirects === '/users/show') {
@@ -71,8 +87,16 @@ export class UsersComponent implements OnInit {
     if (response) {
       this.userService.deleteUser(userId, this.token).subscribe((result: any) => {
         if (result.code == 0) {
-          alert("Utilisateur supprimer")
-          this.route.navigate(['users/show'])
+          this.userService.getUsers(this.token).subscribe((result: any) => {
+            if (result.code == 0) {
+              console.log(result);
+              UsersComponent.users = result.message;
+              alert("Utilisateur supprimer")
+              this.route.navigate(['users/show'])
+            } else {
+              console.log(result.message);
+            }
+          })
         } else {
           alert("something went wrong")
         }

@@ -17,7 +17,7 @@ export class ShowComponent implements OnInit {
 
   constructor(private documentService: DocumentsService, private router: Router) { }
 
-  getStaticDocuments(){
+  getStaticDocuments() {
     return ShowComponent.documents;
   }
   async ngOnInit(): Promise<void> {
@@ -37,42 +37,43 @@ export class ShowComponent implements OnInit {
       this.documentService.getDocuments(token).subscribe((result: any) => {
         if (result.code == 0) {
           //this.documents = result.message;
-              ShowComponent.documents = result.message;
+          ShowComponent.documents = result.message;
         } else {
           console.log(result.message);
         }
       })
     } else {
       //this.documents = DocumentsComponent.documents;
-              ShowComponent.documents = DocumentsComponent.documents;
+      ShowComponent.documents = DocumentsComponent.documents;
     }
   }
-   deleteDocument(docId: string) {
-     let answer = confirm('are you sure  you want to delete this document???')
-     let token = localStorage.getItem('token') ?? "";
-     if (answer) {
-       let payload = {
-         "documentId": docId,
-       }
-       this.documentService.deleteDocument(payload, token).subscribe((result: any) => {
-         if (result.code == 0) {
-           this.documentService.getDocuments(token).subscribe((result: any) => {
-             if (result.code == 0) {
+  deleteDocument(docId: string) {
+    let answer = confirm('are you sure  you want to delete this document???')
+    let token = localStorage.getItem('token') ?? "";
+    if (answer) {
+      let payload = {
+        "documentId": docId,
+      }
+      this.documentService.deleteDocument(payload, token).subscribe((result: any) => {
+        if (result.code == 0) {
+          this.documentService.getDocuments(token).subscribe((result: any) => {
+            if (result.code == 0) {
               // this.documents = result.message;
               ShowComponent.documents = result.message;
               DocumentsComponent.documents = result.message;
-             } else {
-               console.log(result.message);
-             }
-           })
-         } else {
-           alert('someting went wrong')
-         }
-       })
-     }else{
+              alert("Document supprimer avec success")
+            } else {
+              console.log(result.message);
+            }
+          })
+        } else {
+          alert('someting went wrong')
+        }
+      })
+    } else {
       return;
     }
-   }
+  }
   printdocument(docId: string, modId: string, catId: string) {
     console.log("docId: " + docId);
     console.log("modId: " + modId);

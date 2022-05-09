@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import User from 'src/app/models/user';
 import { UsersService } from 'src/app/services/users.service';
 import { UsersComponent } from '../users.component';
@@ -15,6 +16,7 @@ export class ShowUsersComponent implements OnInit {
 
   constructor(
     private userService: UsersService,
+    private route: Router 
   ) {
   }
 
@@ -23,6 +25,16 @@ export class ShowUsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.events.subscribe((val: any) => {
+      this.userService.getUsers(this.token).subscribe((result: any) => {
+        if (result.code == 0) {
+          console.log(result);
+          UsersComponent.users = result.message;
+        } else {
+          console.log(result.message);
+        }
+      })
+    })
     if (UsersComponent.users.length > 0) {
       ShowUsersComponent.users = UsersComponent.users
       console.log(this.getStaticUsers())
