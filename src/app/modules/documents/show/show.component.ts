@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import DocumentJ from 'src/app/models/documentJ';
 import Modules from 'src/app/models/modules';
 import { DocumentsService } from 'src/app/services/documents.service';
@@ -14,11 +14,15 @@ export class ShowComponent implements OnInit {
 
   static documents: DocumentJ[] = []
   modules: Modules[];
+  url: NavigationEnd;
 
   constructor(private documentService: DocumentsService, private router: Router) { }
 
   getStaticDocuments() {
     return ShowComponent.documents;
+  }
+  getStaticSearchTerm() {
+    return DocumentsComponent.searchterm;
   }
   async ngOnInit(): Promise<void> {
     let token = localStorage.getItem('token') ?? "";
@@ -33,7 +37,6 @@ export class ShowComponent implements OnInit {
     } else {
       this.modules = DocumentsComponent.modules;
     }
-    if (!DocumentsComponent.documents) {
       this.documentService.getDocuments(token).subscribe((result: any) => {
         if (result.code == 0) {
           //this.documents = result.message;
@@ -42,13 +45,38 @@ export class ShowComponent implements OnInit {
           console.log(result.message);
         }
       })
-    } else {
-      //this.documents = DocumentsComponent.documents;
-      ShowComponent.documents = DocumentsComponent.documents;
+    if (this.router.url == '/documents/show') {
+        this.documentService.getAllModules(token).subscribe((result: any) => {
+          if (result.code == 0) {
+            this.modules = result.message;
+          } else {
+            console.log(result);
+          }
+        })
     }
+
+
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        this.url = val;
+        if (this.url.urlAfterRedirects === '/documents/show') {
+          if (!DocumentsComponent.modules) {
+            this.documentService.getAllModules(token).subscribe((result: any) => {
+              if (result.code == 0) {
+                this.modules = result.message;
+              } else {
+                console.log(result);
+              }
+            })
+          } else {
+            this.modules = DocumentsComponent.modules;
+          }
+        }
+      }
+    });
   }
   deleteDocument(docId: string) {
-    let answer = confirm('are you sure  you want to delete this document???')
+    let answer = confirm('Êtes-vous sûr de vouloir supprimer ce document?')
     let token = localStorage.getItem('token') ?? "";
     if (answer) {
       let payload = {
@@ -58,10 +86,9 @@ export class ShowComponent implements OnInit {
         if (result.code == 0) {
           this.documentService.getDocuments(token).subscribe((result: any) => {
             if (result.code == 0) {
-              // this.documents = result.message;
               ShowComponent.documents = result.message;
               DocumentsComponent.documents = result.message;
-              alert("Document supprimer avec success")
+              alert('Document supprimè avec succès')
             } else {
               console.log(result.message);
             }

@@ -83,7 +83,7 @@ export class UsersComponent implements OnInit {
   }
 
   delete(userId: any) {
-    let response = confirm("Etes-vous sur de vouloir supprimer cet utilisateur")
+    let response = confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur")
     if (response) {
       this.userService.deleteUser(userId, this.token).subscribe((result: any) => {
         if (result.code == 0) {

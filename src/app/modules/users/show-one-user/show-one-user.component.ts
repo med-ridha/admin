@@ -73,11 +73,12 @@ export class ShowOneUserComponent implements OnInit {
         if (result.code == 0) {
           this.user = result.message;
           this.listUsersCollab = []
-          this.userService.getUserCollabs(this.user.email, this.token).subscribe((result: any) => {
+          this.userService.getUserCollabs(this.user.collabId, this.token).subscribe((result: any) => {
             if (result.code == 0) {
               this.collab = result.message.collab;
               this.listUsersCollab = result.message.listUsers;
             }
+            console.log(this.listUsersCollab);
           })
           this.userService.getUserFavorit(this.user.email, this.token).subscribe((result: any) => {
             this.listDocuments = [];

@@ -76,7 +76,7 @@ export class ShowOneDocumentComponent implements OnInit {
 
   deleteDocumentFromup(docId: string) {
 
-    let answer = confirm('are you sure  you want to delete this document?')
+    let answer = confirm('Êtes-vous sûr de vouloir supprimer ce document?')
     let token = localStorage.getItem('token') ?? "";
     if (answer) {
       let payload = {
@@ -87,6 +87,7 @@ export class ShowOneDocumentComponent implements OnInit {
           this.documentService.getDocuments(token).subscribe((result: any) => {
             if (result.code == 0) {
               DocumentsComponent.documents = result.message;
+              alert('Document supprimè avec succès')
               this.router.navigate(['/documents/show'])
             } else {
               console.log(result.message);

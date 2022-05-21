@@ -111,11 +111,13 @@ export class DocumentsComponent implements OnInit {
   getStaticDocuments(): DocumentJ[] {
     return ShowComponent.documents ?? [];
   }
+  static searchterm : string = "";
   findDocument(form: NgForm) {
     let search = "?";
     if (form.value.search.length > 0) search += "search=" + form.value.search + "&"
     if (form.value.moduleNum.length > 0) search += "module=" + form.value.moduleNum
     console.log(search)
+    DocumentsComponent.searchterm = search;
     this.documentService.findDocument(search, this.token).subscribe((result: any) => {
       if (result.code == 0) {
         ShowComponent.documents = result.message;

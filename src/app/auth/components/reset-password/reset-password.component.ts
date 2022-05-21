@@ -39,7 +39,6 @@ export class ResetPasswordComponent implements OnInit {
   checkToken(token: string, email: string, password: string) {
     const emailObserver = {
       next: async () => {
-        alert("password updated");
         this.route.navigate(['/login']);
       },
       error: (err: any) => {

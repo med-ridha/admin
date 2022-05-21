@@ -13,8 +13,7 @@ export class LoginComponent implements OnInit {
     autoClose: false,
     keepAfterRouteChange: false
   }
-  isEmailError : boolean = false;
-  isPasswordError : boolean = false;
+  isError : boolean = false;
 
   constructor(private authService: AuthService, private route: Router) { }
 
@@ -29,13 +28,10 @@ export class LoginComponent implements OnInit {
       },
       error: (err: any) => {
         if (err === "wrong email"){
-          this.isEmailError = true;
-        this.isPasswordError = false;
+          this.isError = true;
         }
         if (err === "wrong password"){
-          this.isPasswordError = true;
-          this.isEmailError = false;
-          
+          this.isError = true;
         }
       }
     };

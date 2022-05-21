@@ -22,6 +22,7 @@ export class ModifyDocumentComponent implements OnInit {
   dateAdded: string;
   datePu: string;
   catName: string;
+  valid = true;
   constructor(private router: ActivatedRoute, private documentService: DocumentsService, private route: Router) { }
   ngOnInit(): void {
     this.router.params.subscribe((params: Params) => {
@@ -47,33 +48,23 @@ export class ModifyDocumentComponent implements OnInit {
     this.isHidden = !this.isHidden;
   }
 
-  checkDocument(form: NgForm) {
-
-    //let payload = form.value;
-    let payload: any = []
-    payload['docId'] = this.doc._id;
-    console.log(payload)
-    console.log(form)
-    // this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
-    //   console.log(result)
-    //   if (result.result === 'found') {
-    //     alert('document already in the DB')
-    //   }
-    // })
-
-  }
-
   checkTitleFrDocument(form: NgForm) {
     let payload: any = {};
     payload['titleFr'] = form
     payload['docId'] = this.doc._id;
     console.log(payload)
-     this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
-       console.log(result)
-       if (result.result === 'found') {
-         alert('document already in the DB')
-       }
-     })
+    this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
+      console.log(result)
+      if (result.result === 'found') {
+        this.valid = false;
+        alert('document avec se titre existe déjà')
+      } else if (result.result === 'not found') {
+        this.valid = true;
+      } else if (result.value.message === 'document not found') {
+        alert (`document n'existe pas`);
+        this.valid = false;
+      }
+    })
   }
 
   checkTitleArDocument(form: NgForm) {
@@ -81,19 +72,62 @@ export class ModifyDocumentComponent implements OnInit {
     payload['titleAr'] = form
     payload['docId'] = this.doc._id;
     console.log(payload)
-     this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
-       console.log(result)
-       if (result.result === 'found') {
-         alert('document already in the DB')
-       }
-     })
+    this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
+      console.log(result)
+      if (result.result === 'found') {
+        this.valid = false;
+        alert('document avec se titre existe déjà')
+      } else if (result.result === 'not found') {
+        this.valid = true;
+      } else if (result.value.message === 'document not found') {
+        alert (`document n'existe pas`);
+        this.valid = false;
+      }
+    })
+  }
 
+  checkBodyFrDocument(form: NgForm) {
+    let payload: any = {};
+    payload['bodyFr'] = form
+    payload['docId'] = this.doc._id;
+    console.log(payload)
+    this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
+      console.log(result)
+      if (result.result === 'found') {
+        this.valid = false;
+        alert('document avec se corps existe déjà')
+      } else if (result.result === 'not found') {
+        this.valid = true;
+      } else if (result.value.message === 'document not found') {
+        alert (`document n'existe pas`);
+        this.valid = false;
+      }
+    })
+  }
+
+  checkBodyArDocument(form: NgForm) {
+    let payload: any = {};
+    payload['bodyAr'] = form
+    payload['docId'] = this.doc._id;
+    console.log(payload)
+    this.documentService.checkDocument(payload, this.token).subscribe((result: any) => {
+      console.log(result)
+      if (result.result === 'found') {
+        this.valid = false;
+        alert('document avec se corps existe déjà')
+      } else if (result.result === 'not found') {
+        this.valid = true;
+      } else if (result.value.message === 'document not found') {
+        alert (`document n'existe pas`);
+        this.valid = false;
+      }
+    })
   }
 
   onSubmit(form: NgForm) {
 
     if (form.value.categorie == "") {
-      alert('you have to select a category');
+      alert('Vous devez sélectionner une catégorie');
       return;
     }
     let payload = {
@@ -103,10 +137,12 @@ export class ModifyDocumentComponent implements OnInit {
     console.log(form.value);
     this.documentService.updateDocument(payload, this.token).subscribe((result: any) => {
       if (result.code === 0) {
-        alert("updated")
+        alert("Modification effectuè avec succès")
         this.route.navigate([`documents/show/${this.doc._id}`])
+      } else if (result.code === 4){
+        alert("Document inexistant");
       } else {
-        alert("something went wrong");
+        alert ('Erreur interne au serveur')
         console.log(result)
       }
     })
@@ -119,7 +155,7 @@ export class ModifyDocumentComponent implements OnInit {
         console.log(this.modules.id.toString())
         this.getCategories(this.modules.id.toString());
       } else {
-        alert('something went wrong');
+        alert('Erreur interne au serveur');
         console.log(result);
       }
     });
@@ -137,7 +173,7 @@ export class ModifyDocumentComponent implements OnInit {
           }
         }
       } else {
-        alert('something went wrong');
+        alert('Erreur interne au serveur');
         console.log(result.message);
       }
     })

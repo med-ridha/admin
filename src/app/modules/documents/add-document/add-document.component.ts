@@ -18,9 +18,19 @@ export class AddDocumentComponent implements OnInit {
   isCatDisabled: boolean = true;
   isHidden = false;
   token: string = localStorage.getItem('token') ?? "";
+  valid: boolean = true;
   constructor(private documentService: DocumentsService, private router: Router) { }
 
   ngOnInit(): void {
+    DocumentsComponent.docS.getDocuments(this.token).subscribe((result: any) => {
+      console.log(result)
+      if (result.code == 0) {
+        DocumentsComponent.documents = result.message;
+        ShowComponent.documents = result.message;
+      } else {
+        console.log(result.message);
+      }
+    })
   }
 
   switchCat() {
@@ -32,24 +42,29 @@ export class AddDocumentComponent implements OnInit {
     this.documentService.checkDocument(form.value, this.token).subscribe((result: any) => {
       console.log(result)
       if (result.result === 'found') {
-        alert('document already in the DB')
+        alert('Le document existe déjà')
+        this.valid = false;
+      }else{
+        this.valid = true;
       }
     })
   }
-
+  waiting = false;
   onSubmit(form: NgForm) {
 
     if (form.value.categorie == "") {
       alert('you have to select a category');
       return;
     }
-
+    this.waiting = true;
     this.documentService.createDocument(form.value, this.token).subscribe((result: any) => {
       if (result.code == 0) {
-        alert("document add " + result.message._id)
+        this.waiting = false;
+        alert("Document ajouté avec succès")
         this.router.navigate([`/documents/show/${result.message._id}`])
       } else {
-        alert('something went wrong');
+        this.waiting = false;
+        alert('Erreur serveur interne');
         console.log(result.message);
       }
     })
@@ -64,7 +79,7 @@ export class AddDocumentComponent implements OnInit {
         for (let categorie of this.categories) console.log(categorie.name)
         console.log(this.categories)
       } else {
-        alert('something went wrong');
+        alert('Erreur serveur interne');
         console.log(result.message);
       }
     })

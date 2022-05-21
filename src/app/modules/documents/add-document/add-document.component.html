@@ -9,14 +9,14 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="form_titleFr">Title Fr</label>
-                  <input id="titleFr" required (change)='checkDocument(f)' autocomplete='off' ngModel #titleFr="ngModel" type="text" name="titleFr" class="form-control"
-                    placeholder="Enter title Fr">
+                  <input id="titleFr" required (change)='checkDocument(f)' autocomplete='off' ngModel #titleFr="ngModel"
+                    type="text" name="titleFr" class="form-control" placeholder="Enter title Fr">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group"> <label for="form_titleAr">Title Ar</label>
-                  <input id="titleAr" required (change)='checkDocument(f)' autocomplete='off'ngModel #titleAr="ngModel" type="text" name="titleAr" class="form-control"
-                    placeholder="Enter title Ar">
+                  <input id="titleAr" required (change)='checkDocument(f)' autocomplete='off' ngModel #titleAr="ngModel"
+                    type="text" name="titleAr" class="form-control" placeholder="Enter title Ar">
                 </div>
               </div>
             </div>
@@ -38,13 +38,13 @@
               </div>
               <div *ngIf="!isHidden" class="col-md-6">
                 <div class="form-group">
-                  <label for="categoryName">Categories or add
+                  <label for="categoryName">Categories ou ajouter 
                   </label>
-                    <a (click)='switchCat()'>
-                      <mat-icon>add</mat-icon>
-                    </a>
-                  <select [disabled]="isCatDisabled" ngModel #categoryName="ngModel" id="categoryName" name="categoryName"
-                    class="form-control" [required]='!isHidden'>
+                  <a (click)='switchCat()'>
+                    <mat-icon>add</mat-icon>
+                  </a>
+                  <select [disabled]="isCatDisabled" ngModel #categoryName="ngModel" id="categoryName"
+                    name="categoryName" class="form-control" [required]='!isHidden'>
                     <option value="" selected disabled>--Select Categorie--</option>
                     <option *ngFor="let item of categories" value="{{item.name}}">{{item.name}}</option>
                   </select>
@@ -52,13 +52,13 @@
               </div>
               <div *ngIf='isHidden' class="col-md-6">
                 <div class="form-group">
-                  <label for="categoryName">Module or add
+                  <label for="categoryName">Ajouter une Categorie
                   </label>
-                    <a (click)='switchCat()'>
-                      <mat-icon>cancel</mat-icon>
-                    </a>
-                  <input id="categoryName" autocomplete='off' ngModel #categoryName="ngModel" type="text" name="categoryName"
-                    class="form-control" placeholder="Enter categorie" [required]='isHidden'>
+                  <a (click)='switchCat()'>
+                    <mat-icon>cancel</mat-icon>
+                  </a>
+                  <input id="categoryName" autocomplete='off' ngModel #categoryName="ngModel" type="text"
+                    name="categoryName" class="form-control" placeholder="Enter categorie" [required]='isHidden'>
                 </div>
               </div>
             </div>
@@ -81,19 +81,28 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="bodyFr">Body Fr</label>
-                  <textarea ngModel required (change)='checkDocument(f)' #bodyFr='ngModel' id="bodyFr" name="bodyFr" class="form-control" rows="4">
+                  <textarea ngModel required (change)='checkDocument(f)' #bodyFr='ngModel' id="bodyFr" name="bodyFr"
+                    class="form-control" rows="4">
                   </textarea>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="bodyAr">Body Ar</label>
-                  <textarea ngModel required  (change)='checkDocument(f)' #bodyAr='ngModel' id="bodyAr" name="bodyAr" class="form-control" rows="4">
+                  <textarea ngModel required (change)='checkDocument(f)' #bodyAr='ngModel' id="bodyAr" name="bodyAr"
+                    class="form-control" rows="4">
                   </textarea>
                 </div>
               </div>
-              <div class="col-md-12"> <input type="submit" [disabled]="f.invalid"
-                  class="btn btn-success btn-send pt-2 btn-block " value="submit document"> </div>
+              <div class="col-md-12"> 
+                <input *ngIf="!waiting" type="submit" [disabled]="f.invalid || !valid"
+                  class="btn btn-success btn-send pt-2 btn-block" value="submit document">
+              </div>
+              <div class="col-md-12">
+                <div *ngIf="waiting" style="width:100%"class="disabled btn btn-success btn-send pt-2 btn-block">
+                  <div style="margin-left:48%" class='loader'></div>
+                </div>
+              </div>
             </div>
           </div>
         </form>

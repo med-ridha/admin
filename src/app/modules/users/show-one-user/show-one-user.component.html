@@ -9,7 +9,7 @@
     <hr style="height: 2px">
     <div style="height: 5%"></div>
     <h2>Collaborateur: </h2>
-    <div *ngIf="listUsersCollab.length == 0"><span>Utilisateur n'a pas de collaborateurs</span></div>
+    <div *ngIf="listUsersCollab.length == 0"><span>Utilisateur n'a pas de collaboration</span></div>
     <div *ngIf="listUsersCollab.length > 0">
       <label>Nom de la Collaboration : <span>{{collab.name}} <span
             *ngIf="collab.creator === user.email">(owner)</span></span></label><br>

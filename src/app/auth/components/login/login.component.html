@@ -7,19 +7,18 @@
             <input name="email"
               pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
               ngModel required #email="ngModel" type="text" class="form-control" id="email" placeholder="email">
-            <span *ngIf="isEmailError" style="color: red">wrong email</span>
           </div>
           <div class="form-group">
             <input name="password" pattern=".{8,}" ngModel required #password="ngModel" type="password"
               class="form-control" id="password" placeholder="password">
-            <span *ngIf="isPasswordError" style="color: red">wrong password</span>
+            <span *ngIf="isError" style="color: red">Veuillez vérifier vos identifiants</span>
           </div>
           <div class="text-center">
-            <button type="submit" [disabled]="f.invalid" class="btn btn-color px-5 mb-5 w-100">Login</button>
+            <button type="submit" [disabled]="f.invalid" class="btn btn-color px-5 mb-5 w-100">Connexion</button>
           </div>
         </form>
       </div>
-      <a routerLinkActive="Active" [routerLink]="['/resetpassword']"> <span> reset password </span></a>
+      <a routerLinkActive="Active" [routerLink]="['/resetpassword']"> <span> réinitialiser </span></a>
     </div>
   </div>
 </div>
