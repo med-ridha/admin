@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   pieChart: any = [];
   users: any = [];
   searchH: any = [];
+  waiting : boolean = true;
 
   constructor(private route: Router, private documentService: DocumentsService, private userService: UsersService) { }
   url: NavigationEnd;
@@ -50,6 +51,7 @@ export class DashboardComponent implements OnInit {
             if (result.code == 0) {
               this.users = r.message;
               this.searchH = result.message;
+              this.waiting = false;
             }
           })
         }
@@ -61,6 +63,7 @@ export class DashboardComponent implements OnInit {
             if (result.code == 0) {
               this.users = r.message;
               this.searchH = result.message;
+              this.waiting = false;
             }
           })
         }
